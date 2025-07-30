@@ -5,7 +5,7 @@ In Jun 2025, The Fortran WG5 committee confirmed
 which includes a work item for asynchronous collectives:
 
 
-- US04. Add non-blocking collective subroutines
+- US04. Add non-blocking collective subroutines    
   Ref: [N2245 "Non-blocking Collective Subroutines"](https://wg5-fortran.org/N2201-N2250/N2245.pdf)
 
 This repository holds work files for the proposed Fortran 202y asynchronous collectives feature.
@@ -23,8 +23,7 @@ Please try to keep each issue focused on ONE particular topic.
 
 This repository follows the [fork-and-pull](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/getting-started/about-collaborative-development-models#fork-and-pull-model) model of development.
 If you would like to contribute some changes to a draft, please
-[fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks) this repositor
-y,
+[fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks) this repository,
 push your proposed edits to a feature branch in your fork, and then
 [open a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests) against this repo.
 
