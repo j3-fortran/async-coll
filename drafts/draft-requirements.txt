@@ -12,7 +12,10 @@ Requirements
 ------------
 
 R1. Allow the programmer to express explicitly asynchronous collective subroutines.
-  - Rationale: Asynchronous collective subroutines must support the ability to overlap the latency of a collective subroutine with other communication or computation.  For example, this implies that the result image may return from a collective subroutine call before the result is available. Asynchronous collective subroutines must also allow the programmer to express to the compiler that they will not reference the variables involved in a collective subroutine until after the variables have been explicitly synchronized.
+  - Rationale: 
+Asynchronous collective subroutines must support the ability to overlap the latency of a collective subroutine with other communication or computation.
+For example, this implies that the result image may return from a collective subroutine call before the result is available.
+Asynchronous collective subroutines must also allow the programmer to express to the compiler that they will not reference the variables involved in a collective subroutine until after the variables have been explicitly synchronized.
 
 R2. Ability for an image to determine whether a previously launched collective subroutine is complete with respect to this image.
   - Rationale: Completion implies that it is safe to reference any variables involved in the collective subroutine.
