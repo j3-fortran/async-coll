@@ -1,0 +1,10 @@
+To: J3                                                         J3/25-XXX
+Subject: US04: Requirements for Asynchronous Collective Subroutines
+From: Brandon Cook & Damian Rouson & Dan Bonachea
+References: J3/23-174, WG5/N2334, WG5/N2245
+
+Introduction:
+=============
+
+
+
