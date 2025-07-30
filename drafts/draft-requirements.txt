@@ -8,6 +8,29 @@ Introduction
 
 The use case paper...
 
+Illustrative Use Case
+---------------------
+The example below demonstrates the launching of asynchronous co_sum and co_min subroutines.
+
+module async_collectives
+  real :: A=1., B=2.
+  type(completion_type) :: C(2)
+contains
+  subroutine overlap_communication_computation
+    call co_sum(A, completion=C(1))   ! initiate non-blocking collectives
+    call co_min(B, completion=C(2))
+    call do_something() ! programmer guarantees that do_something doesn't reference A and B
+    call test_progress
+    completion wait ( C ) ! await completion of all collectives in C
+    print *, A, B
+  end subroutine
+  subroutine test_progress
+    logical :: complete
+    call completion_query(C(1), complete)
+	  if (complete) print *, A
+  end subroutine
+end module
+
 Requirements
 ------------
 
@@ -26,6 +49,6 @@ R3. Ability for an image to wait until a previously launched collective subrouti
 R4. Allow multiple asynchronous collective subroutines to be in-flight at any given time and synchronized independently.
   
 R5. Allow completion to be unrelated to segment ordering.
-  - Rationale: The execution of an image control statement should have no bearing on determining whether completion has occurred.
+  - Rationale: The execution of an image control statement should have no bearing on determining whether completion has occurred.  Additionally, neither collective subroutines nor an associated completion query or completion wait are image control statements.
 
 R6. Don't introduce semantic requirements that foreseeably degrade performance of existing multi-image features.
