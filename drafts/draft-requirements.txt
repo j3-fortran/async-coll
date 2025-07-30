@@ -3,8 +3,26 @@ Subject: US04: Requirements for Asynchronous Collective Subroutines
 From: Brandon Cook & Damian Rouson & Dan Bonachea
 References: J3/23-174, WG5/N2334, WG5/N2245
 
-Introduction:
-=============
+Introduction
+------------
 
+The use case paper...
 
+Requirements
+------------
 
+R1. Allow the programmer to express explicitly asynchronous collective subroutines.
+  - Rationale: Asynchronous collective subroutines must support the ability to overlap the latency of a collective subroutine with other communication or computation.  For example, this implies that the result image may return from a collective subroutine call before the result is available. Asynchronous collective subroutines must also allow the programmer to express to the compiler that they will not reference the variables involved in a collective subroutine until after the variables have been explicitly synchronized.
+
+R2. Ability for an image to determine whether a previously launched collective subroutine is complete with respect to this image.
+  - Rationale: Completion implies that it is safe to reference any variables involved in the collective subroutine.
+
+R3. Ability for an image to wait until a previously launched collective subroutine call is complete with respect to the waiting image.
+  - Rationale: Completion implies that it is safe to reference any variables involved in the collective subroutine.
+
+R4. Allow multiple asynchronous collective subroutines to be in-flight at any given time and synchronized independently.
+  
+R5. Allow completion to be unrelated to segment ordering.
+  - Rationale: The execution of an image control statement should have no bearing on determining whether completion has occurred.
+
+R6. Don't introduce semantic requirements that foreseeably degrade performance of existing multi-image features.
