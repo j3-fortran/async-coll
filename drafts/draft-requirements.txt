@@ -6,7 +6,9 @@ References: J3/23-174, WG5/N2245, WG5/N2249
 Introduction
 ------------
 
-Use case paper 23-174 "Asynchronous Tasks in Fortran" describes "non-blocking collectives" that inspire the current requirements for what we are now referring to as "asynchronous collective subroutines".
+Use case paper 23-174 "Asynchronous Tasks in Fortran" describes "non-blocking collectives" that inspire the current requirements for what we are now referring to as "asynchronous collective subroutines".  Paper WG5/N2245 provides a rationale for asynchronous collective subroutines. The current Fortran 202Y work list WG5/N2249 includes asynchronous collective subroutines as accepted work item US04.  The current paper provides an illustative use case and a list of requirements.
+
+The primary benefit of allowing the programmer to express asynchrony is to enable the overlap of communication with computation or other communication.  Such overlap plays a significant role in writing scalable applications that effectively utilize hardware elements, including processors and networks, on leading high-performance computing platforms.  Empowering programmers to explicitly express asynchrony eases the burden on compiler developers who would otherwise need to prove properties of code that are difficult or impossible to establish statically in order to exploit the available asynchrony.
 
 Illustrative Use Case
 ---------------------
@@ -30,6 +32,8 @@ contains
 	  if (complete) print *, A
   end subroutine
 end module
+
+This code presumes the existence of a new intrinsic type, which we notionally spell as "completion_type", whose purpose is to track completion of explicitly asynchronous collectives.  The above code shows an object of completion_type as a new optional argument to the existing collective subroutines.  By passing that argument, the programmer expresses their desire for the collective to proceed asynchronously with respect to other work and additionally that the variables involved in the collective will not be referenced or defined until after the collective is successfully synchronized.  The synchronization happens in a subsequent statement that we notionall refer to as "completion wait".
 
 Requirements
 ------------
