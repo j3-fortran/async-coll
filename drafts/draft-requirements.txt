@@ -1,12 +1,12 @@
 To: J3                                                         J3/25-XXX
 Subject: US04: Requirements for Asynchronous Collective Subroutines
 From: Brandon Cook & Damian Rouson & Dan Bonachea
-References: J3/23-174, WG5/N2334, WG5/N2245
+References: J3/23-174, WG5/N2245, WG5/N2249
 
 Introduction
 ------------
 
-The use case paper...
+Use case paper 23-174 "Asynchronous Tasks in Fortran" describes "non-blocking collectives" that inspire the current requirements for what we are now referring to as "asynchronous collective subroutines".
 
 Illustrative Use Case
 ---------------------
@@ -51,4 +51,4 @@ R4. Allow multiple asynchronous collective subroutines to be in-flight at any gi
 R5. Allow completion to be unrelated to segment ordering.
   - Rationale: The execution of an image control statement should have no bearing on determining whether completion has occurred.  Additionally, neither collective subroutines nor an associated completion query or completion wait are image control statements.
 
-R6. Don't introduce semantic requirements that foreseeably degrade performance of existing multi-image features.
+R6. Don't introduce semantic requirements that foreseeably degrade performance of existing features.
