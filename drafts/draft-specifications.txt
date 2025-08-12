@@ -4,32 +4,81 @@ From: Brandon Cook & Damian Rouson & Dan Bonachea
 Date: 2025-August-12
 References: J3/25-162 J3/23-174, WG5/N2245, WG5/N2249
 
-Background
-----------
+1. Background
+---i---------
 Use case paper 23-174 "Asynchronous Tasks in Fortran" describes
 "non-blocking collectives" that inspire the current requirements for what
 we are now referring to as "asynchronous collective subroutines".  
   
-Paper WG5/N2245 provides a rationale for asynchronous collective subroutines. 
+Paper WG5/N2245 provides a rationale for asynchronous collective
+subroutines. 
   
-The current Fortran 202Y work list WG5/N2249 includes asynchronous collective
-subroutines as accepted work item US04.  
+The current Fortran 202Y work list WG5/N2249 includes asynchronous
+collective subroutines as accepted work item US04.  
   
-Paper J3/25-162 "US04: Requirements for Asynchronous Collective Subroutines"
-presents an illustrative use case and a list of requirements.
+Paper J3/25-162 "US04: Requirements for Asynchronous Collective
+Subroutines" presents an illustrative use case and a list of requirements.
   
 The current paper provides specifications for the asynchronous collective 
 subroutines feature.
 
-Specifications
---------------
+2. Completion Type
+------------------
 
-S1. 
+T1. Add a new COMPLETION_TYPE to the ISO_FORTRAN_ENV intrinsic module.
 
-S2. 
+T2. COMPLETION_TYPE represents an abstraction for the completion status
+    of one or more asynchronous collective operations.
 
+T3. COMPLETIONS_TYPE is a derived type with private components. It is an
+    extensible type with no type parameters. Each nonallocatable component
+    is fully default-initialized.
 
+T4. A scalar variable of type COMPLETION_TYPE is an completion variable.
 
+T5. The value of a completion variable includes ...
+
+T6. The initial value of the completion variable is ...
+
+T7. A completion variable shall not appear in a variable definition context
+    except as (the completion-variable in a COMPLETION WAIT statement ?)
+    as an allocate-object, or as an actual argument in a reference
+    to a procedure with an explicit interface if the corresponding dummy
+    argument has INTENT (INOUT).
+
+T8. A variable with a nonpointer subobject of type COMPLETION_TYPE shall
+    not appear in a variable definition context except as an
+    allocate-object in an ALLOCATE statement without a SOURCE= specifier,
+    as an allocate-object in a DEALLOCATE statement, or as an actual
+    argument in a reference to a procedure with an explicit interface if
+    the corresponding dummy argument has INTENT (INOUT).
+
+3. Asynchronous Collective Subroutines
+--------------------------------------
+
+C1. Add a new keyword argument COMPLETION= to each of the five existing
+    collective subroutines: CO_BROADCAST, CO_MAX, CO_MIN, CO_REDUCE, CO_SUM
+
+C2. COMPLETION is an optional INTENT(INOUT) argument.
+
+C3. If the optional COMPLETION argument is absent, the collective
+    subroutine retains unchanged semantics as specified in Fortran 2023.
+
+C4. If the optional COMPLETION argument is provided, it shall be a
+    completion variable of type COMPLETION_TYPE from the intrinsic module
+    ISO_FORTRAN_ENV.
+
+C5. ...
+
+4. Completion Wait
+------------------
+
+W1. ...
+
+5. Completion Query
+-------------------
+
+Q1. ...
 
 
 
