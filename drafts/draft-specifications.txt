@@ -1,0 +1,36 @@
+To: J3                                                     J3/25-162
+Subject: US04: Specifications for Asynchronous Collective Subroutines
+From: Brandon Cook & Damian Rouson & Dan Bonachea
+Date: 2025-August-12
+References: J3/25-162 J3/23-174, WG5/N2245, WG5/N2249
+
+Background
+----------
+Use case paper 23-174 "Asynchronous Tasks in Fortran" describes
+"non-blocking collectives" that inspire the current requirements for what
+we are now referring to as "asynchronous collective subroutines".  
+  
+Paper WG5/N2245 provides a rationale for asynchronous collective subroutines. 
+  
+The current Fortran 202Y work list WG5/N2249 includes asynchronous collective
+subroutines as accepted work item US04.  
+  
+Paper J3/25-162 "US04: Requirements for Asynchronous Collective Subroutines"
+presents an illustrative use case and a list of requirements.
+  
+The current paper provides specifications for the asynchronous collective 
+subroutines feature.
+
+Specifications
+--------------
+
+S1. 
+
+S2. 
+
+
+
+
+
+
+===END===
