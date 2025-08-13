@@ -30,7 +30,7 @@ T1. Add a new COMPLETION_TYPE to the ISO_FORTRAN_ENV intrinsic module.
 T2. COMPLETION_TYPE represents an abstraction for the completion status
     of one or more asynchronous collective operations.
 
-T3. COMPLETIONS_TYPE is a derived type with private components. It is an
+T3. COMPLETION_TYPE is a derived type with private components. It is an
     extensible type with no type parameters. Each nonallocatable component
     is fully default-initialized.
 
