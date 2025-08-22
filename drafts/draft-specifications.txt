@@ -76,23 +76,26 @@ C5. When the optional COMPLETION argument is provided, the completion
 
 C6. When the optional COMPLETION argument is provided, other arguments to
     the collective subroutine shall not be referenced or appear in a variable
-    definition context until after the count associated with the completion
-    variable reaches zero.
+    definition context until after the count of the completion variable 
+    reaches zero.
 
 C7. When the optional COMPLETION argument is provided, the collective
     operation proceeds asynchronously towards completion.  After reaching
-    completion, the completion variable is decremented by the implementation.
+    completion, the count of the completion variable is decremented by the
+    implementation.
 
 4. Completion Wait
 ------------------
 
-W1. ...
+D1. Execution of a completion wait statement results in the executing image
+    waiting until the count of the completion variable reaches zero.
 
 5. Completion Query
 -------------------
 
-Q1. ...
+E1. completion_query is an elemental function.
 
-
+E2. The result of a completion_query function is a default logical variable
+    representing whether the count of the completion variable is zero.
 
 ===END===
