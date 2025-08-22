@@ -36,9 +36,9 @@ T3. COMPLETION_TYPE is a derived type with private components. It is an
 
 T4. A scalar variable of type COMPLETION_TYPE is an completion variable.
 
-T5. The value of a completion variable includes ...
+T5. The value of a completion variable includes a count of outstanding asynchronous collective operations.
 
-T6. The initial value of the completion variable is ...
+T6. The initial value of the completion variable is represents a count of zero.
 
 T7. A completion variable shall not appear in a variable definition context
     except as (the completion-variable in a COMPLETION WAIT statement ?)
@@ -68,7 +68,8 @@ C4. If the optional COMPLETION argument is provided, it shall be a
     completion variable of type COMPLETION_TYPE from the intrinsic module
     ISO_FORTRAN_ENV.
 
-C5. ...
+C5. When the optional COMPLETION argument is provided, the completion 
+    variable shall have its count incremented before return.
 
 4. Completion Wait
 ------------------
