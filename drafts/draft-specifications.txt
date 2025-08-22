@@ -98,4 +98,16 @@ E1. completion_query is an elemental function.
 E2. The result of a completion_query function is a default logical variable
     representing whether the count of the completion variable is zero.
 
+6. Error Behavior
+-----------------
+
+F1. If an error happens during the execution of the collective operation and
+    no STAT variable is present, the implementation initiates error termination.
+
+F2. If an error happens during the execution of a completion initiation and
+    a STAT variable is present, ...
+
+F2. If an error happens during query or wait, ...
+
+
 ===END===
