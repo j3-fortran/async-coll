@@ -38,7 +38,9 @@ T4. A scalar variable of type COMPLETION_TYPE is an completion variable.
 
 T5. The value of a completion variable includes a count of outstanding asynchronous collective operations.
 
-T6. The initial value of the completion variable is represents a count of zero.
+T6. The initial value of the count associated with the completion variable
+    represents that there are no outstanding asynchronous collective
+    subroutines.
 
 T7. A completion variable shall not appear in a variable definition context
     except as (the completion-variable in a COMPLETION WAIT statement ?)
@@ -70,6 +72,13 @@ C4. If the optional COMPLETION argument is provided, it shall be a
 
 C5. When the optional COMPLETION argument is provided, the completion 
     variable shall have its count incremented before return.
+
+C6. When the optional COMPLETION argument is provided, other arguments to
+    the collective subroutine shall not be referenced or appear in a variable
+    definition context until after the count associated with the completion
+    variable reaches zero.
+
+C7. 
 
 4. Completion Wait
 ------------------
