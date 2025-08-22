@@ -36,11 +36,12 @@ T3. COMPLETION_TYPE is a derived type with private components. It is an
 
 T4. A scalar variable of type COMPLETION_TYPE is an completion variable.
 
-T5. The value of a completion variable includes a count of outstanding asynchronous collective operations.
+T5. The value of a completion variable includes a count of outstanding
+    asynchronous collective operations.
 
 T6. The initial value of the count associated with the completion variable
-    represents that there are no outstanding asynchronous collective
-    subroutines.
+    is zero, representing that there are no outstanding asynchronous collective
+    operations.
 
 T7. A completion variable shall not appear in a variable definition context
     except as (the completion-variable in a COMPLETION WAIT statement ?)
@@ -55,8 +56,8 @@ T8. A variable with a nonpointer subobject of type COMPLETION_TYPE shall
     argument in a reference to a procedure with an explicit interface if
     the corresponding dummy argument has INTENT (INOUT).
 
-3. Asynchronous Collective Subroutines
---------------------------------------
+3. Asynchronous Collective Initiation
+-------------------------------------
 
 C1. Add a new keyword argument COMPLETION= to each of the five existing
     collective subroutines: CO_BROADCAST, CO_MAX, CO_MIN, CO_REDUCE, CO_SUM
@@ -78,7 +79,9 @@ C6. When the optional COMPLETION argument is provided, other arguments to
     definition context until after the count associated with the completion
     variable reaches zero.
 
-C7. 
+C7. When the optional COMPLETION argument is provided, the collective
+    operation proceeds asynchronously towards completion.  After reaching
+    completion, the completion variable is decremented by the implementation.
 
 4. Completion Wait
 ------------------
