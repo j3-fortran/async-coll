@@ -85,8 +85,8 @@ C7. When the optional COMPLETION argument is provided, the collective
     completion, the count of the completion variable is decremented by the
     implementation.
 
-4. Completion Wait
-------------------
+4. Completion Wait Statement
+----------------------------
 
 Illustrative syntax:  COMPLETION WAIT( completion-variable )
 
@@ -96,10 +96,12 @@ D1. Execution of a completion wait statement results in the executing image
 D2. A COMPLETION WAIT statement contains no specifiers other than the
     completion-variable.
 
-5. Completion Query
--------------------
+5. Completion Query Function
+----------------------------
 
-Illustrative syntax:  COMPLETION_QUERY( completion-variable )
+Illustrative syntax:  
+   logical :: l
+   l = COMPLETION_QUERY( completion-variable )
 
 E1. completion_query is an elemental function.
 
