@@ -115,8 +115,8 @@ C11. It is permitted for multiple outstanding asynchronous collective
 Illustrative syntax:  COMPLETION WAIT( completion-item )
 
 W1. The completion-item provided to the COMPLETION WAIT statement shall
-    have type COMPLETION_TYPE from the intrinsic module ISO_FORTRAN_ENV.
-    It shall not be coindexed.
+    be a variable with type COMPLETION_TYPE from the intrinsic module 
+    ISO_FORTRAN_ENV. It shall not be coindexed.
 
 W2. When completion-item is scalar, execution of the COMPLETION WAIT
     statement results in the executing image waiting until after the count
