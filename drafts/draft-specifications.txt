@@ -85,7 +85,9 @@ C7. After initiation, the collective operation proceeds asynchronously
     towards completion.  After the collective operation finishes its
     computation with respect to the
     current image, the count of the completion variable is decremented by
-    one by the implementation.  This decrement
+    one by the implementation.  
+    This decrement occurs regardless of whether an error condition occurs.
+This decrement
     is permitted to occur before the initiation call returns. A completion
     variable decrement on one image does not imply that other images
     participating in the same collective operation have finished their computation.
