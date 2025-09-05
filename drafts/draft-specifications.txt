@@ -1,6 +1,6 @@
 To: J3                                                     J3/25-XXX
 Subject: US04: Specifications for Asynchronous Collective Subroutines
-From: Brandon Cook & Damian Rouson & Dan Bonachea
+From: Brandon Cook & Damian Rouson & Dan Bonachea & Reuben D. Budiardja
 Date: 2025-September-05
 References: J3/25-162 J3/23-174, WG5/N2245, WG5/N2249
 
@@ -83,14 +83,13 @@ C6. Implementations are encouraged to return as quickly as possible from
 
 C7. After initiation, the collective operation proceeds asynchronously
     towards completion.  After the collective operation finishes its
-    computation with respect to the
-    current image, the count of the completion variable is decremented by
-    one by the implementation.  
+    computation with respect to the current image, the count of the
+    completion variable is decremented by one by the implementation.  
     This decrement occurs regardless of whether an error condition occurs.
-This decrement
-    is permitted to occur before the initiation call returns. A completion
-    variable decrement on one image does not imply that other images
-    participating in the same collective operation have finished their computation.
+    This decrement is permitted to occur before the initiation call
+    returns. A completion variable decrement on one image does not imply
+    that other images participating in the same collective operation have
+    finished their computation.
 
 C8. An asynchronous collective operation is considered "outstanding" on a
     given image during the period between initiation and when the
