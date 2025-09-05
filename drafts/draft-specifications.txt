@@ -160,13 +160,19 @@ E1. If an error condition occurs during the execution of a collective
     operation and no STAT variable was present during the initiation call,
     the implementation initiates error termination.
 
-E2. If an error condition occurs during the execution of an asynchronous
+E2. If a STAT variable was present during the initiation of an asynchronous
+    collective and no error condition occurs during the computation, the 
+    STAT variable is assigned a zero value as if by intrinsic assignment.  
+    This assignment occurs between initiation and the decrement of the
+    associated completion variable.
+
+E3. If an error condition occurs during the execution of an asynchronous
     collective operation and a STAT variable was present during the
     initiation call, the STAT variable is assigned a non-zero value as if
     by intrinsic assignment.  This assignment occurs between initiation and
     the decrement of the associated completion variable.
 
-E3. If an error condition occurs during the execution of an asynchronous
+E4. If an error condition occurs during the execution of an asynchronous
     collective operation and an ERRMSG variable was present during the
     initiation call, the ERRMSG variable is assigned an explanatory error
     message as if by intrinsic assignment.  This assignment occurs between
