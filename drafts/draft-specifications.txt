@@ -1,4 +1,4 @@
-To: J3                                                     J3/25-XXX
+To: J3                                                     J3/25-165
 Subject: US04: Specifications for Asynchronous Collective Subroutines
 From: Brandon Cook & Damian Rouson & Dan Bonachea & Reuben D. Budiardja
 Date: 2025-September-05
@@ -8,18 +8,18 @@ References: J3/25-162r1, J3/23-174, WG5/N2245, WG5/N2249
 -------------
 Use case paper 23-174 "Asynchronous Tasks in Fortran" describes
 "non-blocking collectives" that inspire the current requirements for what
-we are now referring to as "asynchronous collective subroutines".  
-  
+we are now referring to as "asynchronous collective subroutines".
+
 Paper WG5/N2245 provides a rationale for asynchronous collective
-subroutines. 
-  
+subroutines.
+
 The current Fortran 202Y work list WG5/N2249 includes asynchronous
-collective subroutines as accepted work item US04.  
-  
+collective subroutines as accepted work item US04.
+
 Paper J3/25-162 "US04: Requirements for Asynchronous Collective
 Subroutines" presents an illustrative use case and a list of requirements.
-  
-The current paper provides specifications for the asynchronous collective 
+
+The current paper provides specifications for the asynchronous collective
 subroutines feature.
 
 2. Completion Type
@@ -71,7 +71,7 @@ C4. If the optional COMPLETION argument is provided, it shall be a
     completion variable of type COMPLETION_TYPE from the intrinsic module
     ISO_FORTRAN_ENV. It shall not be coindexed.
 
-C5. When the optional COMPLETION argument is provided, the completion 
+C5. When the optional COMPLETION argument is provided, the completion
     variable shall have its count incremented by one before return, and
     this variable becomes "associated" with the asynchronous collective
     operation. This subroutine call is termed the "initiation" of the
@@ -84,7 +84,7 @@ C6. Implementations are encouraged to return as quickly as possible from
 C7. After initiation, the collective operation proceeds asynchronously
     towards completion.  After the collective operation finishes its
     computation with respect to the current image, the count of the
-    completion variable is decremented by one by the implementation.  
+    completion variable is decremented by one by the implementation.
     This decrement occurs regardless of whether an error condition occurs.
     This decrement is permitted to occur before the initiation call
     returns. A completion variable decrement on one image does not imply
@@ -100,7 +100,7 @@ C9. While an asynchronous collective operation is outstanding, any
     variable provided as the A, STAT or ERRMSG argument to the initiation
     call shall not be referenced, appear in a variable definition context,
     become undefined, or have its pointer association status changed.
-    
+
 C10. A completion variable shall not become undefined while its completion
      count is non-zero.
 
@@ -117,7 +117,7 @@ C11. It is permitted for multiple outstanding asynchronous collective
 Illustrative syntax:  COMPLETION WAIT( completion-item )
 
 W1. The completion-item provided to the COMPLETION WAIT statement shall
-    be a variable with type COMPLETION_TYPE from the intrinsic module 
+    be a variable with type COMPLETION_TYPE from the intrinsic module
     ISO_FORTRAN_ENV. It shall not be coindexed.
 
 W2. When completion-item is scalar, execution of the COMPLETION WAIT
@@ -136,7 +136,7 @@ W5. COMPLETION WAIT is not an image control statement.
 5. Completion Query Function
 ----------------------------
 
-Illustrative syntax:  
+Illustrative syntax:
    logical :: l
    l = COMPLETION_QUERY( completion-variable )
 
@@ -162,8 +162,8 @@ E1. If an error condition occurs during the execution of a collective
     the implementation initiates error termination.
 
 E2. If a STAT variable was present during the initiation of an asynchronous
-    collective and no error condition occurs during the computation, the 
-    STAT variable is assigned a zero value as if by intrinsic assignment.  
+    collective and no error condition occurs during the computation, the
+    STAT variable is assigned a zero value as if by intrinsic assignment.
     This assignment occurs between initiation and the decrement of the
     associated completion variable.
 
