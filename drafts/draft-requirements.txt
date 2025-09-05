@@ -35,17 +35,16 @@ module async_collectives
   type(completion_type) :: C(2)
 contains
   subroutine overlap_communication_computation
-    call co_sum(A, completion=C(1))   ! initiate non-blocking collectives
+    call co_sum(A, completion=C(1))   ! initiate asynchronous collectives
     call co_min(B, completion=C(2))
-    call do_something() ! promises no A,B reference/define in do_something
+    ! no references to A or B permitted while collectives are outstanding
+    call do_something
     call test_progress
     completion wait ( C ) ! await completion of all collectives in C
     print *, A, B
   end subroutine
   subroutine test_progress
-    logical :: complete
-    call completion_query(C(1), complete)
-	  if (complete) print *, A
+    if (completion_query(C(1))) print *, A
   end subroutine
 end module
 
@@ -85,7 +84,7 @@ R3. Ability for an image to wait until a previously launched collective
   - Rationale: Completion implies that it is safe to reference any
     variables involved in the collective subroutine.
 
-R4. Allow multiple asynchronous collective subroutines to be in-flight at
+R4. Allow multiple asynchronous collective subroutines to be outstanding at
     any given time and synchronized independently.
   
 R5. Allow completion to be unrelated to segment ordering.

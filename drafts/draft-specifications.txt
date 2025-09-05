@@ -1,11 +1,11 @@
-To: J3                                                     J3/25-162
+To: J3                                                     J3/25-XXX
 Subject: US04: Specifications for Asynchronous Collective Subroutines
 From: Brandon Cook & Damian Rouson & Dan Bonachea
-Date: 2025-August-12
+Date: 2025-September-05
 References: J3/25-162 J3/23-174, WG5/N2245, WG5/N2249
 
 1. Background
----i---------
+-------------
 Use case paper 23-174 "Asynchronous Tasks in Fortran" describes
 "non-blocking collectives" that inspire the current requirements for what
 we are now referring to as "asynchronous collective subroutines".  
@@ -34,18 +34,18 @@ T3. COMPLETION_TYPE is a derived type with private components. It is an
     extensible type with no type parameters. Each nonallocatable component
     is fully default-initialized.
 
-T4. A scalar variable of type COMPLETION_TYPE is an completion variable.
+T4. A scalar variable of type COMPLETION_TYPE is a completion variable.
 
-T5. The value of a completion variable includes a count of outstanding
-    asynchronous collective operations.
+T5. The value of a completion variable includes its completion count,
+    which is a count of outstanding asynchronous collective operations
+    associated with this variable.
 
-T6. The initial value of the count associated with the completion variable
-    is zero, representing that there are no outstanding asynchronous collective
-    operations.
+T6. The initial value of the completion count of a completion variable
+    is zero, representing that there are no outstanding asynchronous
+    collective operations associated with this variable.
 
 T7. A completion variable shall not appear in a variable definition context
-    except as (the completion-variable in a COMPLETION WAIT statement ?)
-    as an allocate-object, or as an actual argument in a reference
+    except as an allocate-object, or as an actual argument in a reference
     to a procedure with an explicit interface if the corresponding dummy
     argument has INTENT (INOUT).
 
@@ -69,32 +69,67 @@ C3. If the optional COMPLETION argument is absent, the collective
 
 C4. If the optional COMPLETION argument is provided, it shall be a
     completion variable of type COMPLETION_TYPE from the intrinsic module
-    ISO_FORTRAN_ENV.
+    ISO_FORTRAN_ENV. It shall not be coindexed.
 
 C5. When the optional COMPLETION argument is provided, the completion 
-    variable shall have its count incremented before return.
+    variable shall have its count incremented by one before return, and
+    this variable becomes "associated" with the asynchronous collective
+    operation. This subroutine call is termed the "initiation" of the
+    asynchronous collective operation.
 
-C6. When the optional COMPLETION argument is provided, the A, STAT and 
-    ERRMSG arguments to the collective subroutine, if present, shall not
-    be referenced, appear in a variable definition context, or become
-    undefined until after the count of the completion variable reaches
+C6. Implementations are encouraged to return as quickly as possible from
+    the initiation call, but are permitted to stall for processor-dependent
+    reasons before returning from the initiation call.
+
+C7. After initiation, the collective operation proceeds asynchronously
+    towards completion.  After reaching completion with respect to the
+    current image, the count of the completion variable is decremented by
+    one by the implementation.  This completion and corresponding decrement
+    are permitted to occur before the initiation call returns. A completion
+    variable decrement on one image does not imply that other images
+    participating in the same collective operation have reached completion.
+
+C8. An asynchronous collective operation is considered "outstanding" on a
+    given image during the period between initiation and when the
+    completion count of the associated completion variable next reaches
     zero.
 
-C7. When the optional COMPLETION argument is provided, the collective
-    operation proceeds asynchronously towards completion.  After reaching
-    completion, the count of the completion variable is decremented by the
-    implementation.
+C9. While an asynchronous collective operation is outstanding, any
+    variable provided as the A, STAT or ERRMSG argument to the initiation
+    call shall not be referenced, appear in a variable definition context,
+    become undefined, or have its pointer association status changed.
+    
+C10. A completion variable shall not become undefined while its completion
+     count is non-zero.
+
+C11. It is permitted for multiple outstanding asynchronous collective
+    operations to become associated with the same completion variable.
+    Implementations shall support association of up to no less than 128
+    outstanding asynchronous collective operations with any given
+    completion variable.
+
 
 4. Completion Wait Statement
 ----------------------------
 
-Illustrative syntax:  COMPLETION WAIT( completion-variable )
+Illustrative syntax:  COMPLETION WAIT( completion-item )
 
-D1. Execution of a completion wait statement results in the executing image
-    waiting until the count of the completion variable reaches zero.
+W1. The completion-item provided to the COMPLETION WAIT statement shall
+    be a variable with type COMPLETION_TYPE from the intrinsic module 
+    ISO_FORTRAN_ENV. It shall not be coindexed.
 
-D2. A COMPLETION WAIT statement contains no specifiers other than the
-    completion-variable.
+W2. When completion-item is scalar, execution of the COMPLETION WAIT
+    statement results in the executing image waiting until after the count
+    of the completion variable reaches zero.
+
+W3. When completion-item is an array, execution of the COMPLETION WAIT
+    statement results in the executing image waiting until after the count
+    of every completion variable in the array reaches zero.
+
+W4. A COMPLETION WAIT statement contains no specifiers other than the
+    completion-item.
+
+W5. COMPLETION WAIT is not an image control statement.
 
 5. Completion Query Function
 ----------------------------
@@ -103,31 +138,37 @@ Illustrative syntax:
    logical :: l
    l = COMPLETION_QUERY( completion-variable )
 
-E1. completion_query is an elemental function.
+Q1. The completion-variable argument to COMPLETION_QUERY shall be a
+    completion variable of type COMPLETION_TYPE from the intrinsic module
+    ISO_FORTRAN_ENV.  It is an INTENT(IN) argument. It shall not be
+    coindexed.
 
-E2. The result of a completion_query function is a default logical variable
-    representing whether the count of the completion variable is zero.
+Q2. completion_query is an elemental function.
 
-E3. A COMPLETION_QUERY function accepts no arguments other than the
+Q3. The result of the COMPLETION_QUERY function has type default logical,
+    and its value is true if and only if the count of the completion
+    variable is zero.
+
+Q4. A COMPLETION_QUERY function accepts no arguments other than the
     completion-variable.
 
 6. Error Behavior
 -----------------
 
-F1. If an error is detected during the execution of the collective operation and
-    no STAT variable was present during the initiation, the implementation
-    initiates error termination.
+E1. If an error condition occurs during the execution of a collective
+    operation and no STAT variable was present during the initiation call,
+    the implementation initiates error termination.
 
-F2. If an error is detected during the execution of an asynchronous collective 
-    operation and a STAT variable was present during the initiation, the STAT
-    variable is assigned a non-zero value as if by intrinsic assignment.  This
-    assignment occurs between the initiation and when the count of the 
-    completion variable reaches zero.
+E2. If an error condition occurs during the execution of an asynchronous
+    collective operation and a STAT variable was present during the
+    initiation call, the STAT variable is assigned a non-zero value as if
+    by intrinsic assignment.  This assignment occurs between initiation and
+    the decrement of the associated completion variable.
 
-F3. If an error is detected during the execution of an asynchronous collective 
-    operation and an ERRMSG variable was present during the initiation, the ERRMSG
-    variable is assigned an explanatory error message as if by intrinsic
-    assignment.  This assignment occurs between the initiation and when the count
-    of the completion variable reaches zero.
+E3. If an error condition occurs during the execution of an asynchronous
+    collective operation and an ERRMSG variable was present during the
+    initiation call, the ERRMSG variable is assigned an explanatory error
+    message as if by intrinsic assignment.  This assignment occurs between
+    initiation and the decrement of the associated completion variable.
 
 ===END===
