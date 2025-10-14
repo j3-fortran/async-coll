@@ -121,7 +121,7 @@ C13. If the COMPLETION argument is present in a reference to a collective
 4. Completion Subroutine
 ------------------------
 
-Illustrative syntax:  CALL COMPLETE( COMPLETION_VAR [, QUERY] )
+Illustrative syntax:  CALL COMPLETE( COMPLETION_VAR [, QUERY])
 
 W1. The COMPLETION_VAR argument provided to the COMPLETE subroutine shall
     be a variable of type COMPLETION_TYPE from the intrinsic module
@@ -138,17 +138,16 @@ W4. When QUERY is absent and COMPLETION_VAR is an array, execution of the COMPLE
     results in the executing image waiting until after the count
     of every completion variable in the array reaches zero.
 
-W5. When QUERY is present and COMPLETION_VAR is a scalar, the executing the COMPLETE subroutine causes
-    QUERY to be defined to the value true if the count is zero, and false otherwise .
+W5. When QUERY is present and COMPLETION_VAR is a scalar, then executing the COMPLETE subroutine causes
+    QUERY to be defined to the value true if the count is zero, and false otherwise.
 
-W6. The COMPLETE subroutine has no bearing on segment ordering.
+W6. When QUERY is present and COMPLETION_VAR is an array, then executing the COMPLETE subroutine causes
+    each element of QUERY to be defined to the value true if the count of the corresponding element of
+    COMPLETION_VAR is zero, and false otherwise.
 
-W7. The COMPLETE subroutine is not a collective subroutine.
+W7. The COMPLETE subroutine has no bearing on segment ordering.
 
-
-
-Q4. A COMPLETION_QUERY function accepts no arguments other than the
-    completion-variable.
+W8. The COMPLETE subroutine is not a collective subroutine.
 
 6. Error Behavior
 -----------------
