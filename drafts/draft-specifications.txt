@@ -22,6 +22,57 @@ Subroutines" presents an illustrative use case and a list of requirements.
 The current paper provides specifications for the asynchronous collective
 subroutines feature.
 
+1.1 Illustrative Use Case
+-------------------------
+The example below demonstrates the launching of asynchronous co_sum and
+co_min subroutines. All identifier names should be considered notional and
+provisional, subject to resolution in a forthcoming syntax paper.
+
+module async_collectives
+  use iso_fortran_env, only: completion_type
+
+  real :: A=1., B=2.
+  type(completion_type) :: C(2)
+contains
+
+  subroutine overlap_communication_computation
+    integer :: s
+    block
+     asynchronous :: A, B, s
+
+     call co_sum(A, completion=C(1))   ! initiate asynchronous collectives
+     call co_min(B, completion=C(2), stat=s)
+     ! no references to A,B,s permitted while collectives are outstanding
+     call do_something
+     call test_progress
+     call complete ( C ) ! await completion of all collectives in C
+    end block
+    print *, A, B, s
+  end subroutine
+
+  subroutine test_progress
+    logical :: done
+    block
+     asynchronous :: A
+     call complete( C(1), query=done )  ! test for completion
+     if (.not. done) return
+    end block
+    print *, A  ! here it's safe to reference A
+  end subroutine
+
+end module
+
+This code demonstrates a new intrinsic type, which we notionally spell
+"completion_type" (sec 2), whose purpose is to track completion of
+explicitly asynchronous collectives.  The above code shows an object of
+completion_type as a new optional argument to the existing collective
+subroutines.  By passing that argument, the programmer expresses their
+desire for the collective to proceed asynchronously with respect to other
+work and additionally that the variables involved in the collective will
+not be referenced or defined until after the collective is successfully
+synchronized.  The synchronization happens in a subsequent intrinsic that
+we notionally name "complete" (sec 4).
+
 2. Completion Type
 ------------------
 
