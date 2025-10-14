@@ -118,14 +118,17 @@ C13. If the COMPLETION argument is present in a reference to a collective
     subroutine on one image, it shall be present on all the corresponding
     references.
 
-4. Completion Wait Statement
-----------------------------
+4. Completion Subroutine
+------------------------
 
-Illustrative syntax:  COMPLETION WAIT( completion-item )
+Illustrative syntax:  CALL COMPLETE( COMPLETION_VAR [, QUERY] )
 
-W1. The completion-item provided to the COMPLETION WAIT statement shall
-    be a variable with type COMPLETION_TYPE from the intrinsic module
+W1. The COMPLETION_VAR argument provided to the COMPLETE subroutine shall
+    be a variable of type COMPLETION_TYPE from the intrinsic module
     ISO_FORTRAN_ENV. It shall not be coindexed.
+
+W2. The QUERY argument is an optional argument of type logical that, if
+    present, shall have the same shape as COMPLETION_VAR.
 
 W2. When completion-item is scalar, execution of the COMPLETION WAIT
     statement results in the executing image waiting until after the count
@@ -139,9 +142,6 @@ W4. A COMPLETION WAIT statement contains no specifiers other than the
     completion-item.
 
 W5. COMPLETION WAIT is not an image control statement.
-
-5. Completion Query Function
-----------------------------
 
 Illustrative syntax:
    logical :: l
