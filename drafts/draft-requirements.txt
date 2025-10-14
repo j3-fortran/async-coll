@@ -76,7 +76,7 @@ R1. Allow the programmer to express explicitly asynchronous collective
     variables involved in a collective subroutine until after the variables
     have been explicitly synchronized.
 
-R2. Ability for an image to determine whether a previously launched
+R2. Ability for an image to query whether a previously launched
     collective subroutine is complete with respect to this image.
   - Rationale: Completion implies that it is safe to reference any
     variables involved in the collective subroutine.
