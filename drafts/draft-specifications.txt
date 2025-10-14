@@ -71,17 +71,21 @@ C4. If the optional COMPLETION argument is provided, it shall be a
     completion variable of type COMPLETION_TYPE from the intrinsic module
     ISO_FORTRAN_ENV. It shall not be coindexed.
 
-C5. When the optional COMPLETION argument is provided, the completion
+C5. If the optional COMPLETION argument is provided, then the A argument,
+    and the STAT and ERRMSG arguments if present, shall have the 
+    ASYNCHRONOUS attribute.
+
+C6. When the optional COMPLETION argument is provided, the completion
     variable shall have its count incremented by one before return, and
     this variable becomes "associated" with the asynchronous collective
     operation. This subroutine call is termed the "initiation" of the
     asynchronous collective operation.
 
-C6. Implementations are encouraged to return as quickly as possible from
+C7. Implementations are encouraged to return as quickly as possible from
     the initiation call, but are permitted to stall for processor-dependent
     reasons before returning from the initiation call.
 
-C7. After initiation, the collective operation proceeds asynchronously
+C8. After initiation, the collective operation proceeds asynchronously
     towards completion.  After the collective operation finishes its
     computation with respect to the current image, the count of the
     completion variable is decremented by one by the implementation.
@@ -91,29 +95,28 @@ C7. After initiation, the collective operation proceeds asynchronously
     that other images participating in the same collective operation have
     finished their computation.
 
-C8. An asynchronous collective operation is considered "outstanding" on a
+C9. An asynchronous collective operation is considered "outstanding" on a
     given image during the period between initiation and when the
     completion count of the associated completion variable next reaches
     zero.
 
-C9. While an asynchronous collective operation is outstanding, any
+C10. While an asynchronous collective operation is outstanding, any
     variable provided as the A, STAT or ERRMSG argument to the initiation
     call shall not be referenced, appear in a variable definition context,
     become undefined, or have its pointer association status changed.
 
-C10. A completion variable shall not become undefined while its completion
+C11. A completion variable shall not become undefined while its completion
      count is non-zero.
 
-C11. It is permitted for multiple outstanding asynchronous collective
+C12. It is permitted for multiple outstanding asynchronous collective
     operations to become associated with the same completion variable.
     Implementations shall support association of up to no less than 128
     outstanding asynchronous collective operations with any given
     completion variable.
 
-C12. If the COMPLETION argument is present in a reference to a collective
+C13. If the COMPLETION argument is present in a reference to a collective
     subroutine on one image, it shall be present on all the corresponding
     references.
-
 
 4. Completion Wait Statement
 ----------------------------
