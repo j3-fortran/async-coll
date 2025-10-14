@@ -110,6 +110,10 @@ C11. It is permitted for multiple outstanding asynchronous collective
     outstanding asynchronous collective operations with any given
     completion variable.
 
+C12. If the COMPLETION argument is present in a reference to a collective
+    subroutine on one image, it shall be present on all the corresponding
+    references.
+
 
 4. Completion Wait Statement
 ----------------------------
