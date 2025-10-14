@@ -95,3 +95,5 @@ R5. Allow completion to be unrelated to segment ordering.
 
 R6. Don't introduce semantic requirements that foreseeably degrade
     performance of existing features.
+
+===END===
