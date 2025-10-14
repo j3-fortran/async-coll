@@ -2,7 +2,7 @@ To: J3                                                     J3/25-165
 Subject: US04: Specifications for Asynchronous Collective Subroutines
 From: Brandon Cook & Damian Rouson & Dan Bonachea & Reuben D. Budiardja
 Date: 2025-September-05
-References: J3/25-162r1, J3/23-174, WG5/N2245, WG5/N2249
+References: J3/25-162r1, J3/23-174, J3/25-007r1, WG5/N2245, WG5/N2249
 
 1. Background
 -------------
@@ -102,7 +102,8 @@ C9. An asynchronous collective operation is considered "outstanding" on a
 
 C10. While an asynchronous collective operation is outstanding, any
     variable provided as the A, STAT or ERRMSG argument to the initiation
-    call shall not be referenced, appear in a variable definition context,
+    call is considered a pending communicator affector (25-007r1 18.10.4).
+    As such, it shall not be referenced, appear in a variable definition context,
     become undefined, or have its pointer association status changed.
 
 C11. A completion variable shall not become undefined while its completion
