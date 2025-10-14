@@ -125,38 +125,27 @@ Illustrative syntax:  CALL COMPLETE( COMPLETION_VAR [, QUERY] )
 
 W1. The COMPLETION_VAR argument provided to the COMPLETE subroutine shall
     be a variable of type COMPLETION_TYPE from the intrinsic module
-    ISO_FORTRAN_ENV. It shall not be coindexed.
+    ISO_FORTRAN_ENV. It shall be INTENT(INOUT) and shall not be coindexed.
 
 W2. The QUERY argument is an optional argument of type logical that, if
     present, shall have the same shape as COMPLETION_VAR.
 
-W2. When completion-item is scalar, execution of the COMPLETION WAIT
-    statement results in the executing image waiting until after the count
-    of the completion variable reaches zero.
+W3. When QUERY is absent and COMPLETION_VAR is a scalar, execution of the
+    COMPLETE subroutine results in the executing image waiting until after
+    the count of the completion variable reaches zero.
 
-W3. When completion-item is an array, execution of the COMPLETION WAIT
-    statement results in the executing image waiting until after the count
+W4. When QUERY is absent and COMPLETION_VAR is an array, execution of the COMPLETE subroutine
+    results in the executing image waiting until after the count
     of every completion variable in the array reaches zero.
 
-W4. A COMPLETION WAIT statement contains no specifiers other than the
-    completion-item.
+W5. When QUERY is present and COMPLETION_VAR is a scalar, the executing the COMPLETE subroutine causes
+    QUERY to be defined to the value true if the count is zero, and false otherwise .
 
-W5. COMPLETION WAIT is not an image control statement.
+W6. The COMPLETE subroutine has no bearing on segment ordering.
 
-Illustrative syntax:
-   logical :: l
-   l = COMPLETION_QUERY( completion-variable )
+W7. The COMPLETE subroutine is not a collective subroutine.
 
-Q1. The completion-variable argument to COMPLETION_QUERY shall be a
-    completion variable of type COMPLETION_TYPE from the intrinsic module
-    ISO_FORTRAN_ENV.  It is an INTENT(IN) argument. It shall not be
-    coindexed.
 
-Q2. completion_query is an elemental function.
-
-Q3. The result of the COMPLETION_QUERY function has type default logical,
-    and its value is true if and only if the count of the completion
-    variable is zero.
 
 Q4. A COMPLETION_QUERY function accepts no arguments other than the
     completion-variable.
