@@ -98,4 +98,10 @@ R5. Allow completion to be unrelated to segment ordering.
 R6. Don't introduce semantic requirements that foreseeably degrade
     performance of existing features.
 
+R7. Completion operations satisfying R2 and R3 operate on a closed set of
+    previously launched collective subroutines identified by the caller.
+    They do not (for example) enable implicit completion of all
+    asynchronous collective operations that may happen to be outstanding
+    with respect to the calling image.
+
 ===END===
