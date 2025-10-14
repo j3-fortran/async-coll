@@ -101,10 +101,11 @@ C9. An asynchronous collective operation is considered "outstanding" on a
     zero.
 
 C10. While an asynchronous collective operation is outstanding, any
-    variable provided as the A, STAT or ERRMSG argument to the initiation
-    call is considered a pending communicator affector (25-007r1 18.10.4).
-    As such, it shall not be referenced, appear in a variable definition context,
-    become undefined, or have its pointer association status changed.
+     variable provided as the A, STAT or ERRMSG argument to the initiation
+     call is considered a pending communicator affector (25-007r1 18.10.4)
+     for an asynchronous input communication.  As such, it shall not be
+     referenced, appear in a variable definition context, become undefined,
+     or have its pointer association status changed.
 
 C11. A completion variable shall not become undefined while its completion
      count is non-zero.
