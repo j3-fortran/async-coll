@@ -154,7 +154,8 @@ W8. The COMPLETE subroutine is not a collective subroutine.
 
 E1. If an error condition occurs during the execution of a collective
     operation and no STAT variable was present during the initiation call,
-    the implementation initiates error termination.
+    the implementation initiates error termination.  This error termination
+    need not occur during a call to the COMPLETE subroutine.
 
 E2. If a STAT variable was present during the initiation of an asynchronous
     collective and no error condition occurs during the computation, the
