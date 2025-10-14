@@ -31,6 +31,8 @@ The example below demonstrates the launching of asynchronous co_sum and
 co_min subroutines.
 
 module async_collectives
+  use iso_fortran_env, only: completion_type  ! notional naming
+
   real :: A=1., B=2.
   type(completion_type) :: C(2)
 contains
@@ -74,7 +76,7 @@ R1. Allow the programmer to express explicitly asynchronous collective
     variables involved in a collective subroutine until after the variables
     have been explicitly synchronized.
 
-R2. Ability for an image to determine whether a previously launched
+R2. Ability for an image to query whether a previously launched
     collective subroutine is complete with respect to this image.
   - Rationale: Completion implies that it is safe to reference any
     variables involved in the collective subroutine.
@@ -95,3 +97,11 @@ R5. Allow completion to be unrelated to segment ordering.
 
 R6. Don't introduce semantic requirements that foreseeably degrade
     performance of existing features.
+
+R7. Completion operations satisfying R2 and R3 operate on a closed set of
+    previously launched collective subroutines identified by the caller.
+    They do not (for example) enable implicit completion of all
+    asynchronous collective operations that may happen to be outstanding
+    with respect to the calling image.
+
+===END===
