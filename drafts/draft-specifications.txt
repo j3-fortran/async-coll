@@ -2,7 +2,7 @@ To: J3                                                     J3/25-165
 Subject: US04: Specifications for Asynchronous Collective Subroutines
 From: Brandon Cook & Damian Rouson & Dan Bonachea & Reuben D. Budiardja
 Date: 2025-September-05
-References: J3/25-162r1, J3/23-174, WG5/N2245, WG5/N2249
+References: J3/25-162r2, J3/23-174, J3/25-007r1, WG5/N2245, WG5/N2249
 
 1. Background
 -------------
@@ -16,11 +16,62 @@ subroutines.
 The current Fortran 202Y work list WG5/N2249 includes asynchronous
 collective subroutines as accepted work item US04.
 
-Paper J3/25-162 "US04: Requirements for Asynchronous Collective
+Paper J3/25-162r2 "US04: Requirements for Asynchronous Collective
 Subroutines" presents an illustrative use case and a list of requirements.
 
 The current paper provides specifications for the asynchronous collective
 subroutines feature.
+
+1.1 Illustrative Use Case
+-------------------------
+The example below demonstrates the launching of asynchronous co_sum and
+co_min subroutines. All identifier names should be considered notional and
+provisional, subject to resolution in a forthcoming syntax paper.
+
+module async_collectives
+  use iso_fortran_env, only: completion_type
+
+  real :: A=1., B=2.
+  type(completion_type) :: C(2)
+contains
+
+  subroutine overlap_communication_computation
+    integer :: s
+    block
+     asynchronous :: A, B, s
+
+     call co_sum(A, completion=C(1))   ! initiate asynchronous collectives
+     call co_min(B, completion=C(2), stat=s)
+     ! no references to A,B,s permitted while collectives are outstanding
+     call do_something
+     call test_progress
+     call complete ( C ) ! await completion of all collectives in C
+    end block
+    print *, A, B, s
+  end subroutine
+
+  subroutine test_progress
+    logical :: done
+    block
+     asynchronous :: A
+     call complete( C(1), query=done )  ! test for completion
+     if (.not. done) return
+    end block
+    print *, A  ! here it's safe to reference A
+  end subroutine
+
+end module
+
+This code demonstrates a new intrinsic type, which we notionally spell
+"completion_type" (sec 2), whose purpose is to track completion of
+explicitly asynchronous collectives.  The above code shows an object of
+completion_type as a new optional argument to the existing collective
+subroutines.  By passing that argument, the programmer expresses their
+desire for the collective to proceed asynchronously with respect to other
+work and additionally that the variables involved in the collective will
+not be referenced or defined until after the collective is successfully
+synchronized.  The synchronization happens in a subsequent intrinsic that
+we notionally name "complete" (sec 4).
 
 2. Completion Type
 ------------------
@@ -67,21 +118,25 @@ C2. COMPLETION is an optional INTENT(INOUT) argument.
 C3. If the optional COMPLETION argument is absent, the collective
     subroutine retains unchanged semantics as specified in Fortran 2023.
 
-C4. If the optional COMPLETION argument is provided, it shall be a
+C4. If the optional COMPLETION argument is present, it shall be a
     completion variable of type COMPLETION_TYPE from the intrinsic module
     ISO_FORTRAN_ENV. It shall not be coindexed.
 
-C5. When the optional COMPLETION argument is provided, the completion
+C5. If the optional COMPLETION argument is present, then the A argument,
+    and the STAT and ERRMSG arguments if present, shall have the 
+    ASYNCHRONOUS attribute.
+
+C6. When the optional COMPLETION argument is present, the completion
     variable shall have its count incremented by one before return, and
     this variable becomes "associated" with the asynchronous collective
     operation. This subroutine call is termed the "initiation" of the
     asynchronous collective operation.
 
-C6. Implementations are encouraged to return as quickly as possible from
+C7. Implementations are encouraged to return as quickly as possible from
     the initiation call, but are permitted to stall for processor-dependent
     reasons before returning from the initiation call.
 
-C7. After initiation, the collective operation proceeds asynchronously
+C8. After initiation, the collective operation proceeds asynchronously
     towards completion.  After the collective operation finishes its
     computation with respect to the current image, the count of the
     completion variable is decremented by one by the implementation.
@@ -91,75 +146,71 @@ C7. After initiation, the collective operation proceeds asynchronously
     that other images participating in the same collective operation have
     finished their computation.
 
-C8. An asynchronous collective operation is considered "outstanding" on a
+C9. An asynchronous collective operation is considered "outstanding" on a
     given image during the period between initiation and when the
     completion count of the associated completion variable next reaches
     zero.
 
-C9. While an asynchronous collective operation is outstanding, any
-    variable provided as the A, STAT or ERRMSG argument to the initiation
-    call shall not be referenced, appear in a variable definition context,
-    become undefined, or have its pointer association status changed.
+C10. While an asynchronous collective operation is outstanding, any
+     variable provided as the A, STAT or ERRMSG argument to the initiation
+     call is considered a pending communicator affector (25-007r1 18.10.4)
+     for an asynchronous input communication.  As such, it shall not be
+     referenced, appear in a variable definition context, become undefined,
+     or have its pointer association status changed.
 
-C10. A completion variable shall not become undefined while its completion
+C11. A completion variable shall not become undefined while its completion
      count is non-zero.
 
-C11. It is permitted for multiple outstanding asynchronous collective
+C12. It is permitted for multiple outstanding asynchronous collective
     operations to become associated with the same completion variable.
     Implementations shall support association of up to no less than 128
     outstanding asynchronous collective operations with any given
     completion variable.
 
+C13. If the COMPLETION argument is present in a reference to a collective
+    subroutine on one image, it shall be present on all the corresponding
+    references.
 
-4. Completion Wait Statement
-----------------------------
+4. Completion Subroutine
+------------------------
 
-Illustrative syntax:  COMPLETION WAIT( completion-item )
+Illustrative syntax:  CALL COMPLETE( COMPLETION_VAR [, QUERY])
 
-W1. The completion-item provided to the COMPLETION WAIT statement shall
-    be a variable with type COMPLETION_TYPE from the intrinsic module
-    ISO_FORTRAN_ENV. It shall not be coindexed.
+W1. The COMPLETION_VAR argument provided to the COMPLETE subroutine shall
+    be a variable of type COMPLETION_TYPE from the intrinsic module
+    ISO_FORTRAN_ENV. It shall be INTENT(INOUT) and shall not be coindexed.
 
-W2. When completion-item is scalar, execution of the COMPLETION WAIT
-    statement results in the executing image waiting until after the count
-    of the completion variable reaches zero.
+W2. The QUERY argument is an optional argument of type logical that, if
+    present, shall have the same shape as COMPLETION_VAR.
 
-W3. When completion-item is an array, execution of the COMPLETION WAIT
-    statement results in the executing image waiting until after the count
-    of every completion variable in the array reaches zero.
+W3. When QUERY is absent and COMPLETION_VAR is a scalar, execution of the
+    COMPLETE subroutine causes the executing image to wait until after
+    the count of the completion variable reaches zero.
 
-W4. A COMPLETION WAIT statement contains no specifiers other than the
-    completion-item.
+W4. When QUERY is absent and COMPLETION_VAR is an array, execution of the
+    COMPLETE subroutine causes the executing image to wait until after the
+    count of every completion variable in the array reaches zero.
 
-W5. COMPLETION WAIT is not an image control statement.
+W5. When QUERY is present and COMPLETION_VAR is a scalar, then executing
+    the COMPLETE subroutine causes QUERY to be defined to the value true if
+    the count of the completion variable is zero, and false otherwise.
 
-5. Completion Query Function
-----------------------------
+W6. When QUERY is present and COMPLETION_VAR is an array, then executing
+    the COMPLETE subroutine causes each element of QUERY to be defined to
+    the value true if the count of the completion variable in the
+    corresponding element of COMPLETION_VAR is zero, and false otherwise.
 
-Illustrative syntax:
-   logical :: l
-   l = COMPLETION_QUERY( completion-variable )
+W7. The COMPLETE subroutine has no bearing on segment ordering.
 
-Q1. The completion-variable argument to COMPLETION_QUERY shall be a
-    completion variable of type COMPLETION_TYPE from the intrinsic module
-    ISO_FORTRAN_ENV.  It is an INTENT(IN) argument. It shall not be
-    coindexed.
+W8. The COMPLETE subroutine is not a collective subroutine.
 
-Q2. completion_query is an elemental function.
-
-Q3. The result of the COMPLETION_QUERY function has type default logical,
-    and its value is true if and only if the count of the completion
-    variable is zero.
-
-Q4. A COMPLETION_QUERY function accepts no arguments other than the
-    completion-variable.
-
-6. Error Behavior
+5. Error Behavior
 -----------------
 
 E1. If an error condition occurs during the execution of a collective
     operation and no STAT variable was present during the initiation call,
-    the implementation initiates error termination.
+    the implementation initiates error termination.  This error termination
+    need not occur during a call to the COMPLETE subroutine.
 
 E2. If a STAT variable was present during the initiation of an asynchronous
     collective and no error condition occurs during the computation, the
