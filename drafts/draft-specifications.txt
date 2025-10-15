@@ -133,19 +133,21 @@ W2. The QUERY argument is an optional argument of type logical that, if
     present, shall have the same shape as COMPLETION_VAR.
 
 W3. When QUERY is absent and COMPLETION_VAR is a scalar, execution of the
-    COMPLETE subroutine results in the executing image waiting until after
+    COMPLETE subroutine causes the executing image to wait until after
     the count of the completion variable reaches zero.
 
-W4. When QUERY is absent and COMPLETION_VAR is an array, execution of the COMPLETE subroutine
-    results in the executing image waiting until after the count
-    of every completion variable in the array reaches zero.
+W4. When QUERY is absent and COMPLETION_VAR is an array, execution of the
+    COMPLETE subroutine causes the executing image to wait until after the
+    count of every completion variable in the array reaches zero.
 
-W5. When QUERY is present and COMPLETION_VAR is a scalar, then executing the COMPLETE subroutine causes
-    QUERY to be defined to the value true if the count is zero, and false otherwise.
+W5. When QUERY is present and COMPLETION_VAR is a scalar, then executing
+    the COMPLETE subroutine causes QUERY to be defined to the value true if
+    the count of the completion variable is zero, and false otherwise.
 
-W6. When QUERY is present and COMPLETION_VAR is an array, then executing the COMPLETE subroutine causes
-    each element of QUERY to be defined to the value true if the count of the corresponding element of
-    COMPLETION_VAR is zero, and false otherwise.
+W6. When QUERY is present and COMPLETION_VAR is an array, then executing
+    the COMPLETE subroutine causes each element of QUERY to be defined to
+    the value true if the count of the completion variable in the
+    corresponding element of COMPLETION_VAR is zero, and false otherwise.
 
 W7. The COMPLETE subroutine has no bearing on segment ordering.
 
