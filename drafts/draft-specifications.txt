@@ -67,15 +67,15 @@ C2. COMPLETION is an optional INTENT(INOUT) argument.
 C3. If the optional COMPLETION argument is absent, the collective
     subroutine retains unchanged semantics as specified in Fortran 2023.
 
-C4. If the optional COMPLETION argument is provided, it shall be a
+C4. If the optional COMPLETION argument is present, it shall be a
     completion variable of type COMPLETION_TYPE from the intrinsic module
     ISO_FORTRAN_ENV. It shall not be coindexed.
 
-C5. If the optional COMPLETION argument is provided, then the A argument,
+C5. If the optional COMPLETION argument is present, then the A argument,
     and the STAT and ERRMSG arguments if present, shall have the 
     ASYNCHRONOUS attribute.
 
-C6. When the optional COMPLETION argument is provided, the completion
+C6. When the optional COMPLETION argument is present, the completion
     variable shall have its count incremented by one before return, and
     this variable becomes "associated" with the asynchronous collective
     operation. This subroutine call is termed the "initiation" of the
