@@ -153,7 +153,7 @@ W7. The COMPLETE subroutine has no bearing on segment ordering.
 
 W8. The COMPLETE subroutine is not a collective subroutine.
 
-6. Error Behavior
+5. Error Behavior
 -----------------
 
 E1. If an error condition occurs during the execution of a collective
