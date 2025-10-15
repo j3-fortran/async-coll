@@ -50,10 +50,10 @@ explicitly asynchronous collectives.  The above code shows an object of
 completion_type as a new optional argument to the existing collective
 subroutines.  By passing that argument, the programmer expresses their
 desire for the collective to proceed asynchronously with respect to other
-work and additionally that the variables involved in the collective will
-not be referenced or defined until after the collective is successfully
-synchronized.  The synchronization happens in a subsequent intrinsic that
-we notionally name "complete" (sec 4).
+work and additionally asserting that the variables involved in the
+collective will not be referenced or defined until after the collective is
+successfully synchronized.  The synchronization happens in a subsequent
+intrinsic that we notionally name "complete" (sec 4).
 
 EXAMPLE 2:
 
