@@ -42,7 +42,6 @@ EXAMPLE 1:
      call do_something
      call complete ( CC ) ! await completion of all collectives in CC
      print *, X, Y
-
   end subroutine
 
 This code demonstrates a new intrinsic type, which we notionally spell
@@ -63,6 +62,7 @@ module async_collectives
 
   real :: A=1., B=2.
   type(completion_type) :: C(2)
+
 contains
  
   subroutine overlap_communication_computation
