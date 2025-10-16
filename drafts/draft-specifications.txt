@@ -23,7 +23,7 @@ The current paper provides specifications for the asynchronous collective
 subroutines feature.  All identifier names should be considered notional
 and provisional, subject to resolution in a forthcoming syntax paper.
 
-1.1 Illustrative Use Case
+1.1 Illustrative Examples
 -------------------------
 The examples below demonstrate the launching of asynchronous collective
 subroutines. 
