@@ -58,38 +58,21 @@ C6. Assuming that edits for both work items DIN1 and US04 are applied for
     immediately precede the new optional COMPLETION argument in the syntax
     of each collective subroutine listed above.
 
-4. Completion Wait Statement Syntax
+4. Completion Query Function Syntax
 -----------------------------------
 
-A new <action-stmt> called COMPLETION WAIT is introduced, with the
+A new standard intrinsic subroutine called COMPLETE is introduced, with the
 following syntax:
 
-W1. <completion-wait-stmt>  <<is>>
-      COMPLETION WAIT ( <completion-item> )
+W1. COMPLETE( COMPLETION_VAR [, QUERY ]) 
 
-W2. <completion-item>  <<is>>  <variable>
+W2. COMPLETION_VAR   shall be a variable of type COMPLETION_TYPE from the
+                     intrinsic module ISO_FORTRAN_ENV. It shall not be
+                     coindexed. It is an INTENT(INOUT) argument.
 
-W3. The <completion-item> specifier to COMPLETION WAIT shall be a variable
-    of type COMPLETION_TYPE from the intrinsic module ISO_FORTRAN_ENV.
-
-W4. The COMPLETION WAIT statement contains no specifiers other than the
-    <completion-item>.
-
-See J3/25-165r1 for detailed specifications and semantics.
-
-5. Completion Query Function Syntax
------------------------------------
-
-A new standard intrinsic elemental function called COMPLETION_QUERY is
-introduced, with the following syntax:
-
-Q1. COMPLETION_QUERY ( COMPLETION )
-
-Q1. The COMPLETION argument to COMPLETION_QUERY() shall be a variable of
-    type COMPLETION_TYPE from the intrinsic module ISO_FORTRAN_ENV.
-
-Q3. The COMPLETION_QUERY function accepts no arguments other than the
-    completion variable.
+W3. QUERY (optional) when present, shall be a variable of logical type with
+                     the same shape as COMPLETION_VAR. It is an INTENT(OUT)
+                     argument.
 
 See J3/25-165r1 for detailed specifications and semantics.
 
