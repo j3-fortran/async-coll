@@ -2,17 +2,17 @@ To: J3                                                     J3/25-166
 Subject: US04: Syntax for Asynchronous Collective Subroutines
 From: Brandon Cook & Damian Rouson & Dan Bonachea & Reuben D. Budiardja
 Date: 2025-September-12
-References: J3/25-162r1, J3/25-165, J3/25-127r1, WG5/N2249
+References: J3/25-162r2, J3/25-165r1, J3/25-127r1, WG5/N2249
 
 1. Background
 -------------
 The current Fortran 202Y work list WG5/N2249 includes asynchronous
 collective subroutines as accepted work item US04.
 
-Paper J3/25-162r1 "US04: Requirements for Asynchronous Collective
+Paper J3/25-162r2 "US04: Requirements for Asynchronous Collective
 Subroutines" presents an illustrative use case and a list of requirements.
 
-Paper J3/25-165 "US04: Specifications for Asynchronous Collective
+Paper J3/25-165r1 "US04: Specifications for Asynchronous Collective
 Subroutines" presents the proposed specifications and semantics for the new
 asynchronous collective subroutines feature. Please consult that paper for
 all semantic details, which will not be replicated here.
@@ -26,7 +26,7 @@ for the asynchronous collective subroutines feature.
 T1. New type COMPLETION_TYPE is added to the ISO_FORTRAN_ENV intrinsic
     module.
 
-See J3/25-165 for detailed specifications and semantics.
+See J3/25-165r1 for detailed specifications and semantics.
 
 3. Asynchronous Collective Initiation Syntax
 --------------------------------------------
@@ -45,7 +45,7 @@ C4. CO_REDUCE (A, OPERATION [, RESULT_IMAGE, STAT, ERRMSG, COMPLETION])
 
 C5. CO_SUM (A [, RESULT_IMAGE, STAT, ERRMSG, COMPLETION])
 
-See J3/25-165 for detailed specifications and semantics.
+See J3/25-165r1 for detailed specifications and semantics.
 
 Note that J3/25-127r1 "DIN1: Collectives over a specified team,
 req/spec/syntax/edits" also adds a different trailing optional argument
@@ -75,7 +75,7 @@ W3. The <completion-item> specifier to COMPLETION WAIT shall be a variable
 W4. The COMPLETION WAIT statement contains no specifiers other than the
     <completion-item>.
 
-See J3/25-165 for detailed specifications and semantics.
+See J3/25-165r1 for detailed specifications and semantics.
 
 5. Completion Query Function Syntax
 -----------------------------------
@@ -91,6 +91,6 @@ Q1. The COMPLETION argument to COMPLETION_QUERY() shall be a variable of
 Q3. The COMPLETION_QUERY function accepts no arguments other than the
     completion variable.
 
-See J3/25-165 for detailed specifications and semantics.
+See J3/25-165r1 for detailed specifications and semantics.
 
 ===END===
