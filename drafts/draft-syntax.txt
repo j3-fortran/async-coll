@@ -58,8 +58,8 @@ C6. Assuming that edits for both work items DIN1 and US04 are applied for
     immediately precede the new optional COMPLETION argument in the syntax
     of each collective subroutine listed above.
 
-4. Completion Query Function Syntax
------------------------------------
+4. Completion Subroutine Syntax
+-------------------------------
 
 A new standard intrinsic subroutine called COMPLETE is introduced, with the
 following syntax:
