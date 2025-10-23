@@ -49,7 +49,7 @@ edits passed in section 5 of J3/25-127r1.
 
 Each of the collective subroutines are expanded into four forms,
 corresponding to the appearance or non-appearance of a COMPLETION argument
-of type COMPLETION_TYPE and a TEAM argument of type TYPE_TYPE (also from
+of type COMPLETION_TYPE and a TEAM argument of type TEAM_TYPE (also from
 intrinsic module ISO_FORTRAN_ENV).
 
 The full syntax for all forms of the updated collective subroutines is as
@@ -87,7 +87,7 @@ C5. CO_SUM (A [, RESULT_IMAGE, STAT, ERRMSG]) or
 
 See J3/25-165r1 for detailed specifications and semantics; since that
 paper, the COMPLETION argument has been changed from an optional argument
-to a required argument with alternative intrinsics forms. However the same
+to a required argument with alternative intrinsic forms. However the same
 semantics apply, with "presence" or "absence" of the COMPLETION argument
 replaced with whether or not it appears in the call, respectively.
 
