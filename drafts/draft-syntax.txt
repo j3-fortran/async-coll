@@ -81,16 +81,18 @@ C6. Assuming that edits for both work items DIN1 and US04 are applied for
 A new standard intrinsic subroutine called COMPLETE is introduced, with the
 following syntax:
 
-W1. COMPLETE( COMPLETION_VAR [, QUERY ])
+W1. COMPLETE( COMPLETION [, FINISHED ])
 
-W2. COMPLETION_VAR   shall be a variable of type COMPLETION_TYPE from the
-                     intrinsic module ISO_FORTRAN_ENV. It shall not be
-                     coindexed. It is an INTENT(INOUT) argument.
+W2. COMPLETION   shall be a variable of type COMPLETION_TYPE from the
+                 intrinsic module ISO_FORTRAN_ENV. It shall not be
+                 coindexed. It is an INTENT(INOUT) argument.
 
-W3. QUERY (optional) when present, shall be a variable of logical type with
-                     the same shape as COMPLETION_VAR. It is an INTENT(OUT)
-                     argument.
+W3. FINISHED (optional) when present, shall be a variable of logical type
+                        with the same shape as COMPLETION. It is an
+                        INTENT(OUT) argument.
 
-See J3/25-165r1 for detailed specifications and semantics.
+See J3/25-165r1 for detailed specifications and semantics; the argument
+names have been modified since that paper, but the corresponding semantics
+remain unchanged.
 
 ===END===
