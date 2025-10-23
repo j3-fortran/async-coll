@@ -2,7 +2,7 @@ To: J3                                                     J3/25-166r1
 Subject: US04: Syntax for Asynchronous Collective Subroutines
 From: Brandon Cook & Damian Rouson & Dan Bonachea & Reuben D. Budiardja
 Date: 2025-October-20
-References: J3/25-162r2, J3/25-165r1, J3/25-127r1, WG5/N2249
+References: J3/25-162r2, J3/25-165r1, J3/25-166r1, J3/25-127r1, WG5/N2249
 
 1. Background
 -------------
@@ -11,6 +11,7 @@ collective subroutines as accepted work item US04.
 
 Paper J3/25-162r2 "US04: Requirements for Asynchronous Collective
 Subroutines" presents an illustrative use case and a list of requirements.
+It passed at the Oct 2025 J3 meeting #237.
 
 Paper J3/25-165r1 "US04: Specifications for Asynchronous Collective
 Subroutines" presents the specifications and semantics for the new
@@ -20,9 +21,9 @@ will not be replicated here.
 
 The current paper focuses exclusively on the proposed syntactic elements
 for the asynchronous collective subroutines feature.  This revision of the
-paper incorporates J3 committee feedback provided in discussion of revision
-J3/25-166r1 on 2025-10-22, and applies the results from a series of straw
-polls used to settle the syntax.
+paper incorporates J3 committee feedback provided in plenary discussion of
+revision J3/25-166r1 on 2025-10-22, and applies the results from a series
+of straw polls used to settle the syntax.
 
 2. Completion Type Syntax
 -------------------------
@@ -42,9 +43,9 @@ US04.  These two features (US04 and DIN1) are entirely orthogonal, but
 their effects must be merged in the final syntax.
 
 For clarity of direction, this paper incorporates the syntactic changes
-from work item DIN1, and this paper supersedes the syntax presented in
-section 4 of J3/25-127r1.  A subsequent edit paper is also expected to
-supersede the edits passed in J3/25-127r1.
+from work item DIN1, and supersedes the syntax presented in section 4 of
+J3/25-127r1.  A forthcoming edit paper is also expected to supersede the
+edits passed in section 5 of J3/25-127r1.
 
 Each of the collective subroutines are expanded into four forms,
 corresponding to the appearance or non-appearance of a COMPLETION argument
@@ -55,30 +56,32 @@ The full syntax for all forms of the updated collective subroutines is as
 follows. The first form of each intrinsic corresponds to the unmodified
 current intrinsic interface.
 
-C1. CO_BROADCAST (A, SOURCE_IMAGE [, STAT, ERRMSG])
-    CO_BROADCAST (A, SOURCE_IMAGE, COMPLETION [, STAT, ERRMSG])
-    CO_BROADCAST (A, SOURCE_IMAGE, TEAM [, STAT, ERRMSG])
+C1. CO_BROADCAST (A, SOURCE_IMAGE [, STAT, ERRMSG]) or
+    CO_BROADCAST (A, SOURCE_IMAGE, COMPLETION [, STAT, ERRMSG]) or
+    CO_BROADCAST (A, SOURCE_IMAGE, TEAM [, STAT, ERRMSG]) or
     CO_BROADCAST (A, SOURCE_IMAGE, TEAM, COMPLETION [, STAT, ERRMSG])
 
-C2. CO_MAX (A [, RESULT_IMAGE, STAT, ERRMSG])
-    CO_MAX (A [, RESULT_IMAGE], COMPLETION [, STAT, ERRMSG])
-    CO_MAX (A [, RESULT_IMAGE], TEAM [, STAT, ERRMSG])
+C2. CO_MAX (A [, RESULT_IMAGE, STAT, ERRMSG]) or
+    CO_MAX (A [, RESULT_IMAGE], COMPLETION [, STAT, ERRMSG]) or
+    CO_MAX (A [, RESULT_IMAGE], TEAM [, STAT, ERRMSG]) or
     CO_MAX (A [, RESULT_IMAGE], TEAM, COMPLETION [, STAT, ERRMSG])
 
-C3. CO_MIN (A [, RESULT_IMAGE, STAT, ERRMSG])
-    CO_MIN (A [, RESULT_IMAGE], COMPLETION [, STAT, ERRMSG])
-    CO_MIN (A [, RESULT_IMAGE], TEAM [, STAT, ERRMSG])
+C3. CO_MIN (A [, RESULT_IMAGE, STAT, ERRMSG]) or
+    CO_MIN (A [, RESULT_IMAGE], COMPLETION [, STAT, ERRMSG]) or
+    CO_MIN (A [, RESULT_IMAGE], TEAM [, STAT, ERRMSG]) or
     CO_MIN (A [, RESULT_IMAGE], TEAM, COMPLETION [, STAT, ERRMSG])
 
-C4. CO_REDUCE (A, OPERATION [, RESULT_IMAGE, STAT, ERRMSG])
-    CO_REDUCE (A, OPERATION [, RESULT_IMAGE], COMPLETION [, STAT, ERRMSG])
-    CO_REDUCE (A, OPERATION [, RESULT_IMAGE], TEAM [, STAT, ERRMSG])
-    CO_REDUCE (A, OPERATION [, RESULT_IMAGE], 
-               TEAM, COMPLETION [, STAT, ERRMSG])
+C4. CO_REDUCE (A, OPERATION [, RESULT_IMAGE, STAT, ERRMSG]) or
+    CO_REDUCE (A, OPERATION [, RESULT_IMAGE], COMPLETION
+                                              [, STAT, ERRMSG]) or
+    CO_REDUCE (A, OPERATION [, RESULT_IMAGE], TEAM 
+                                              [, STAT, ERRMSG]) or
+    CO_REDUCE (A, OPERATION [, RESULT_IMAGE], TEAM, COMPLETION
+                                              [, STAT, ERRMSG])
 
-C5. CO_SUM (A [, RESULT_IMAGE, STAT, ERRMSG])
-    CO_SUM (A [, RESULT_IMAGE], COMPLETION [, STAT, ERRMSG])
-    CO_SUM (A [, RESULT_IMAGE], TEAM [, STAT, ERRMSG])
+C5. CO_SUM (A [, RESULT_IMAGE, STAT, ERRMSG]) or
+    CO_SUM (A [, RESULT_IMAGE], COMPLETION [, STAT, ERRMSG]) or
+    CO_SUM (A [, RESULT_IMAGE], TEAM [, STAT, ERRMSG]) or
     CO_SUM (A [, RESULT_IMAGE], TEAM, COMPLETION [, STAT, ERRMSG])
 
 
