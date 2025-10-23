@@ -39,8 +39,8 @@ See J3/25-165r1 for detailed specifications and semantics.
 Paper J3/25-127r1 "DIN1: Collectives over a specified team,
 req/spec/syntax/edits" (passed at Jun 2025 J3 meeting #236), adds a new
 TEAM argument to the same collective subroutines impacted by work item
-US04.  The functionality of these two features (US04 and DIN1) is entirely orthogonal, but
-their effects must be merged in the final syntax.
+US04.  The functionality of these two features (US04 and DIN1) is entirely
+orthogonal, but their effects must be merged in the final syntax.
 
 For clarity of direction, this paper incorporates the syntactic changes
 from work item DIN1, and supersedes the syntax presented in section 4 of
