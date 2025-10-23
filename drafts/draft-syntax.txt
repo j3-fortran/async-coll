@@ -39,26 +39,48 @@ Paper J3/25-127r1 "DIN1: Collectives over a specified team,
 req/spec/syntax/edits" (passed at Jun 2025 J3 meeting #236), adds a new
 TEAM argument to the same collective subroutines impacted by work item
 US04.  These two features (US04 and DIN1) are entirely orthogonal, but
-the their effects must be merged in the final syntax.
+their effects must be merged in the final syntax.
 
 For clarity of direction, this paper incorporates the syntactic changes
 from work item DIN1, and this paper supersedes the syntax presented in
 section 4 of J3/25-127r1.  A subsequent edit paper is also expected to
-supercede the edits passed in J3/25-127r1.
+supersede the edits passed in J3/25-127r1.
 
-An optional COMPLETION argument of type COMPLETION_TYPE is added as the
-final argument to each of the five collective subroutines, yielding the
-following:
+Each of the collective subroutines are expanded into four forms,
+corresponding to the appearance or non-appearance of a COMPLETION argument
+of type COMPLETION_TYPE and a TEAM argument of type TYPE_TYPE (also from
+intrinsic module ISO_FORTRAN_ENV).
 
-C1. CO_BROADCAST (A, SOURCE_IMAGE [, STAT, ERRMSG, COMPLETION])
+The full syntax for all forms of the updated collective subroutines is as
+follows. The first form of each intrinsic corresponds to the unmodified
+current intrinsic interface.
 
-C2. CO_MAX (A [, RESULT_IMAGE, STAT, ERRMSG, COMPLETION])
+C1. CO_BROADCAST (A, SOURCE_IMAGE [, STAT, ERRMSG])
+    CO_BROADCAST (A, SOURCE_IMAGE, COMPLETION [, STAT, ERRMSG])
+    CO_BROADCAST (A, SOURCE_IMAGE, TEAM [, STAT, ERRMSG])
+    CO_BROADCAST (A, SOURCE_IMAGE, TEAM, COMPLETION [, STAT, ERRMSG])
 
-C3. CO_MIN (A [, RESULT_IMAGE, STAT, ERRMSG, COMPLETION])
+C2. CO_MAX (A [, RESULT_IMAGE, STAT, ERRMSG])
+    CO_MAX (A [, RESULT_IMAGE], COMPLETION [, STAT, ERRMSG])
+    CO_MAX (A [, RESULT_IMAGE], TEAM [, STAT, ERRMSG])
+    CO_MAX (A [, RESULT_IMAGE], TEAM, COMPLETION [, STAT, ERRMSG])
 
-C4. CO_REDUCE (A, OPERATION [, RESULT_IMAGE, STAT, ERRMSG, COMPLETION])
+C3. CO_MIN (A [, RESULT_IMAGE, STAT, ERRMSG])
+    CO_MIN (A [, RESULT_IMAGE], COMPLETION [, STAT, ERRMSG])
+    CO_MIN (A [, RESULT_IMAGE], TEAM [, STAT, ERRMSG])
+    CO_MIN (A [, RESULT_IMAGE], TEAM, COMPLETION [, STAT, ERRMSG])
 
-C5. CO_SUM (A [, RESULT_IMAGE, STAT, ERRMSG, COMPLETION])
+C4. CO_REDUCE (A, OPERATION [, RESULT_IMAGE, STAT, ERRMSG])
+    CO_REDUCE (A, OPERATION [, RESULT_IMAGE], COMPLETION [, STAT, ERRMSG])
+    CO_REDUCE (A, OPERATION [, RESULT_IMAGE], TEAM [, STAT, ERRMSG])
+    CO_REDUCE (A, OPERATION [, RESULT_IMAGE], 
+               TEAM, COMPLETION [, STAT, ERRMSG])
+
+C5. CO_SUM (A [, RESULT_IMAGE, STAT, ERRMSG])
+    CO_SUM (A [, RESULT_IMAGE], COMPLETION [, STAT, ERRMSG])
+    CO_SUM (A [, RESULT_IMAGE], TEAM [, STAT, ERRMSG])
+    CO_SUM (A [, RESULT_IMAGE], TEAM, COMPLETION [, STAT, ERRMSG])
+
 
 See J3/25-165r1 for detailed specifications and semantics; since that
 paper, the COMPLETION argument has been changed from an optional argument
@@ -66,14 +88,6 @@ to a required argument with alternative intrinsics forms. However the same
 semantics apply, with "presence" or "absence" of the COMPLETION argument
 replaced with whether or not it appears in the call, respectively.
 
-Note that J3/25-127r1 "DIN1: Collectives over a specified team,
-req/spec/syntax/edits" also adds a different trailing optional argument
-(TEAM) to each of the collective subroutines above, for work item DIN1.
-
-C6. Assuming that edits for both work items DIN1 and US04 are applied for
-    Fortran 202Y, we propose that the new optional TEAM argument
-    immediately precede the new optional COMPLETION argument in the syntax
-    of each collective subroutine listed above.
 
 4. Completion Subroutine Syntax
 -------------------------------
