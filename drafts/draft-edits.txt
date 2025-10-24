@@ -198,6 +198,12 @@ COMPLETE( COMPLETION [, FINISHED ])  S  Synchronize a completion variable.
  CO_BROADCAST (A, SOURCE_IMAGE, TEAM [, STAT, ERRMSG]) or \
  CO_BROADCAST (A, SOURCE_IMAGE, TEAM, COMPLETION [, STAT, ERRMSG])"
 
+[408:35-36] in the description of A:
+ replace "the current team" by "the specified team"
+
+[409:4] in the description of SOURCE_IMAGE:
+ replace "the current team" by "the specified team"
+
 [409:6+] before the description of STAT in paragraph 3, insert:
 
 "TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
@@ -220,6 +226,9 @@ COMPLETE( COMPLETION [, FINISHED ])  S  Synchronize a completion variable.
  CO_MAX (A [, RESULT_IMAGE], TEAM [, STAT, ERRMSG]) or \
  CO_MAX (A [, RESULT_IMAGE], TEAM, COMPLETION [, STAT, ERRMSG])"
 
+[409:27] in the description of RESULT_IMAGE:
+ replace "the current team" by "the specified team"
+
 [409:28+] before the description of STAT in paragraph 3, insert:
 
 "TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
@@ -241,6 +250,9 @@ COMPLETE( COMPLETION [, FINISHED ])  S  Synchronize a completion variable.
  CO_MIN (A [, RESULT_IMAGE], COMPLETION [, STAT, ERRMSG]) or \
  CO_MIN (A [, RESULT_IMAGE], TEAM [, STAT, ERRMSG]) or \
  CO_MIN (A [, RESULT_IMAGE], TEAM, COMPLETION [, STAT, ERRMSG])"
+
+[410:11] in the description of RESULT_IMAGE:
+ replace "the current team" by "the specified team"
 
 [410:12+] before the description of STAT in paragraph 3, insert:
 
@@ -267,6 +279,9 @@ COMPLETE( COMPLETION [, FINISHED ])  S  Synchronize a completion variable.
  CO_REDUCE (A, OPERATION [, RESULT_IMAGE], TEAM, COMPLETION \
                                           [, STAT, ERRMSG])"
 
+[411:3] in the description of RESULT_IMAGE:
+ replace "the current team" by "the specified team"
+
 [411:4+] before the description of STAT in paragraph 3, insert:
 
 "TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
@@ -288,6 +303,9 @@ COMPLETE( COMPLETION [, FINISHED ])  S  Synchronize a completion variable.
  CO_SUM (A [, RESULT_IMAGE], COMPLETION [, STAT, ERRMSG]) or \
  CO_SUM (A [, RESULT_IMAGE], TEAM [, STAT, ERRMSG]) or \
  CO_SUM (A [, RESULT_IMAGE], TEAM, COMPLETION [, STAT, ERRMSG])"
+
+[411:35] in the description of RESULT_IMAGE:
+ replace "the current team" by "the specified team"
 
 [411:36+] before the description of STAT in paragraph 3, insert:
 
