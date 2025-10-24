@@ -198,6 +198,18 @@ COMPLETE( COMPLETION [, FINISHED ])  S  Synchronize a completion variable.
  CO_BROADCAST (A, SOURCE_IMAGE, TEAM [, STAT, ERRMSG]) or \
  CO_BROADCAST (A, SOURCE_IMAGE, TEAM, COMPLETION [, STAT, ERRMSG])"
 
+[409:6+] before the description of STAT in paragraph 3, insert:
+
+"TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
+      ISO_FORTRAN_ENV. It is an INTENT (IN) argument.
+
+ COMPLETION shall be a scalar of type COMPLETION_TYPE from the intrinsic
+            module ISO_FORTRAN_ENV. It is an INTENT (INOUT) argument."
+
+[409:9] replace paragraph 4 with:
+
+"The semantics of TEAM, COMPLETION, STAT and ERRMSG are described in 16.6."
+
 -------------------------------------------------------------------------
 16.9.55 CO_MAX:
 
@@ -208,6 +220,17 @@ COMPLETE( COMPLETION [, FINISHED ])  S  Synchronize a completion variable.
  CO_MAX (A [, RESULT_IMAGE], TEAM [, STAT, ERRMSG]) or \
  CO_MAX (A [, RESULT_IMAGE], TEAM, COMPLETION [, STAT, ERRMSG])"
 
+[409:28+] before the description of STAT in paragraph 3, insert:
+
+"TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
+      ISO_FORTRAN_ENV. It is an INTENT (IN) argument.
+
+ COMPLETION shall be a scalar of type COMPLETION_TYPE from the intrinsic
+            module ISO_FORTRAN_ENV. It is an INTENT (INOUT) argument."
+
+[409:31] replace paragraph 4 with:
+
+"The semantics of TEAM, COMPLETION, STAT and ERRMSG are described in 16.6."
 
 -------------------------------------------------------------------------
 16.9.56 CO_MIN:
@@ -218,6 +241,18 @@ COMPLETE( COMPLETION [, FINISHED ])  S  Synchronize a completion variable.
  CO_MIN (A [, RESULT_IMAGE], COMPLETION [, STAT, ERRMSG]) or \
  CO_MIN (A [, RESULT_IMAGE], TEAM [, STAT, ERRMSG]) or \
  CO_MIN (A [, RESULT_IMAGE], TEAM, COMPLETION [, STAT, ERRMSG])"
+
+[410:12+] before the description of STAT in paragraph 3, insert:
+
+"TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
+      ISO_FORTRAN_ENV. It is an INTENT (IN) argument.
+
+ COMPLETION shall be a scalar of type COMPLETION_TYPE from the intrinsic
+            module ISO_FORTRAN_ENV. It is an INTENT (INOUT) argument."
+
+[410:15] replace paragraph 4 with:
+
+"The semantics of TEAM, COMPLETION, STAT and ERRMSG are described in 16.6."
 
 -------------------------------------------------------------------------
 16.9.56 CO_REDUCE:
@@ -232,6 +267,18 @@ COMPLETE( COMPLETION [, FINISHED ])  S  Synchronize a completion variable.
  CO_REDUCE (A, OPERATION [, RESULT_IMAGE], TEAM, COMPLETION \
                                           [, STAT, ERRMSG])"
 
+[411:4+] before the description of STAT in paragraph 3, insert:
+
+"TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
+      ISO_FORTRAN_ENV. It is an INTENT (IN) argument.
+
+ COMPLETION shall be a scalar of type COMPLETION_TYPE from the intrinsic
+            module ISO_FORTRAN_ENV. It is an INTENT (INOUT) argument."
+
+[411:7] replace paragraph 4 with:
+
+"The semantics of TEAM, COMPLETION, STAT and ERRMSG are described in 16.6."
+
 -------------------------------------------------------------------------
 16.9.56 CO_SUM:
 
@@ -241,6 +288,18 @@ COMPLETE( COMPLETION [, FINISHED ])  S  Synchronize a completion variable.
  CO_SUM (A [, RESULT_IMAGE], COMPLETION [, STAT, ERRMSG]) or \
  CO_SUM (A [, RESULT_IMAGE], TEAM [, STAT, ERRMSG]) or \
  CO_SUM (A [, RESULT_IMAGE], TEAM, COMPLETION [, STAT, ERRMSG])"
+
+[411:36+] before the description of STAT in paragraph 3, insert:
+
+"TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
+      ISO_FORTRAN_ENV. It is an INTENT (IN) argument.
+
+ COMPLETION shall be a scalar of type COMPLETION_TYPE from the intrinsic
+            module ISO_FORTRAN_ENV. It is an INTENT (INOUT) argument."
+
+[411:39] replace paragraph 4 with:
+
+"The semantics of TEAM, COMPLETION, STAT and ERRMSG are described in 16.6."
 
 -------------------------------------------------------------------------
 [412:14+] In 16.9 Specifications of the standard intrinsic procedures,
@@ -255,10 +314,10 @@ after the specification of COMMAND_ARGUMENT_COUNT, add:
 <<Arguments.>>
 
 COMPLETION shall be a completion variable (16.10.2.??).
-           It shall not be coindexed. It is an INTENT(INOUT) argument.
+           It shall not be coindexed. It is an INTENT (INOUT) argument.
 
 FINISHED (optional) when present, shall be a variable of logical type with
-                    the same shape as COMPLETION. It is an INTENT(OUT)
+                    the same shape as COMPLETION. It is an INTENT (OUT)
                     argument.
 
 ** TODO: Description
