@@ -55,6 +55,29 @@ collective subroutines.
 -------------------------------------------------------------------------
 16.6 Collective subroutines:
 
+[380:26] paragraph 1:
+ replace "the current team" by "the specified team"
+
+[380:28] paragraph 1:
+ replace "its current team" by "the specified team"
+
+[380:30+] after paragraph 1:
+ Insert new paragraph reading:
+
+"The team specified by an invocation of a collective subroutine is
+ the current team if the TEAM argument is not present in that
+ invocation. Otherwise, it is the team identified by the value of
+ the TEAM argument. On all images participating in the same collective
+ computation, the specified team shall be the same team; either the
+ initial team, or the same team created by the same FORM TEAM statement
+ (11.7.9)."
+
+[380:32] paragraph 2:
+  replace "of a team" with "of the specified team".
+
+[381:2,7,13,15] paragraph 3, paragraph 4 bullet 4, paragraph 6 (twice):
+ replace "the current team" by "the specified team".
+
 [379:XX]
 
 
