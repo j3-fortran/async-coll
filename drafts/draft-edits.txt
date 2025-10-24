@@ -211,6 +211,40 @@ FINISHED (optional) when present, shall be a variable of logical type with
 ** TODO: Example
 
 ------------------------------------------------------------------------
+[493:14] Insert a new section in 16.10.2 before CURRENT_TEAM:
+
+16.10.2.?? COMPLETION_TYPE
+
+COMPLETION_TYPE is a derived type with private components. It is an
+extensible type with no type parameters. Each nonallocatable component is
+fully default-initialized.
+
+A scalar variable of type COMPLETION_TYPE is a completion variable.
+A completion variable represents an abstraction for the completion status
+    of one or more asynchronous collective operations.
+
+
+T5. The value of a completion variable includes its completion count,
+    which is a count of outstanding asynchronous collective operations
+    associated with this variable.
+
+T6. The initial value of the completion count of a completion variable
+    is zero, representing that there are no outstanding asynchronous
+    collective operations associated with this variable.
+
+T7. A completion variable shall not appear in a variable definition context
+    except as an allocate-object, or as an actual argument in a reference
+    to a procedure with an explicit interface if the corresponding dummy
+    argument has INTENT (INOUT).
+
+C??? A variable with a nonpointer subobject of type COMPLETION_TYPE shall
+     not appear in a variable definition context except as an
+     allocate-object in an ALLOCATE statement without a SOURCE= specifier,
+     as an allocate-object in a DEALLOCATE statement, or as an actual
+     argument in a reference to a procedure with an explicit interface if
+     the corresponding dummy argument has INTENT (INOUT).
+
+
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 ===END===
