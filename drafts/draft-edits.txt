@@ -196,9 +196,8 @@ after the specification of COMMAND_ARGUMENT_COUNT, add:
 
 <<Arguments.>>
 
-COMPLETION shall be a variable of type COMPLETION_TYPE from the intrinsic
-           module ISO_FORTRAN_ENV. It shall not be coindexed. It is an
-           INTENT(INOUT) argument.
+COMPLETION shall be a completion variable (16.10.2.??).
+           It shall not be coindexed. It is an INTENT(INOUT) argument.
 
 FINISHED (optional) when present, shall be a variable of logical type with
                     the same shape as COMPLETION. It is an INTENT(OUT)
