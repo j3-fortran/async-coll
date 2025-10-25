@@ -363,9 +363,29 @@ FINISHED (optional) when present, shall be a variable of logical type with
 
 ** TODO: Description
 
-<<Example.>>
+<<Example.>> This example demonstrates how to initiate several asynchronous
+collective subroutines and overlap the latency of that communication with
+other unrelated work. In the example, there is asynchronous input
+communication; the variables X, Y and S are pending communication affectors
+between the collective subroutine initiation call where they are passed as
+arguments and the subsequent COMPLETE subroutine call that synchronizes the
+associated completion variable C.
 
-** TODO: Example
+  SUBROUTINE simple_overlap
+     use ISO_FORTRAN_ENV, ONLY: COMPLETION_TYPE
+     INTEGER :: X, Y, S
+     ... <Code that initializes X and Y>
+     BLOCK
+       TYPE(COMPLETION_TYPE) :: C
+       ASYNCHRONOUS :: X, Y, S
+       CALL CO_SUM(x, COMPLETION=C)   ! initiate asynchronous collectives
+       CALL CO_MAX(y, COMPLETION=C, STAT=S)
+       ! no references to X,Y,S permitted while collectives are outstanding
+       CALL do_something_else
+       CALL COMPLETE ( C ) ! await completion of both collectives
+       PRINT *, X, Y, S
+     END BLOCK
+  END SUBROUTINE
 
 ------------------------------------------------------------------------
 [493:14] Insert a new section in 16.10.2 before CURRENT_TEAM:
