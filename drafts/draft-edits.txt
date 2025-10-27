@@ -418,7 +418,23 @@ FINISHED (optional) when present, shall be a variable of logical type with
                     the same shape as COMPLETION. It is an INTENT (OUT)
                     argument.
 
-** TODO: Description
+The effect of calling COMPLETE depends on the presence of the FINISHED
+argument:
+
+<Case (i):>   CALL COMPLETE(COMPLETION) causes the executing image to wait
+              until the count of every completion variable in COMPLETION
+              reaches zero.
+
+<Case (ii):>  If FINISHED is present and scalar, then
+              CALL COMPLETE(COMPLETION, FINISHED) causes FINISHED to be
+              defined to the value true if the count of completion variable
+              COMPLETION is zero, and false otherwise.
+
+<Case (iii):> If FINISHED is present and an array, then
+              CALL COMPLETE(COMPLETION, FINISHED) causes each element of
+              FINISHED to be defined to the value true if the count of
+              completion variable in the corresponding element of
+              COMPLETION is zero, and false otherwise.
 
 <<Example.>> This example demonstrates how to initiate several asynchronous
 collective subroutines and overlap the latency of that communication with
@@ -443,6 +459,12 @@ associated completion variable C.
        PRINT *, X, Y, S
      END BLOCK
   END SUBROUTINE
+
+<<NOTE>>
+COMPLETE is not a collective subroutine. Execution of COMPLETE does not
+imply any synchronization between images. Completion of an asynchronous
+collective operation by one image does not imply completion of the same
+collective operation by any other image.
 
 ------------------------------------------------------------------------
 [493:14+] Insert a new section in 16.10.2 before CURRENT_TEAM:
