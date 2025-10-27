@@ -8,7 +8,6 @@ TODO:
 -----
 * Decide where/how to describe COMPLETION argument (16.6?)
 * Update 18.10.4 Asynchronous communication 
-* Merge in edits from 127r1, adjusted for 25-007r1
 
 
 1. Background
