@@ -176,12 +176,6 @@ C10. While an asynchronous collective operation is outstanding, any
      referenced, appear in a variable definition context, become undefined,
      or have its pointer association status changed.
 
-C12. It is permitted for multiple outstanding asynchronous collective
-    operations to become associated with the same completion variable.
-    Implementations shall support association of up to no less than 128
-    outstanding asynchronous collective operations with any given
-    completion variable.
-
 C13. If the COMPLETION argument is present in a reference to a collective
     subroutine on one image, it shall be present on all the corresponding
     references.
@@ -497,13 +491,14 @@ extensible type with no type parameters. Each nonallocatable component is
 fully default-initialized.
 
 A scalar variable of type COMPLETION_TYPE is a completion variable.
-A completion variable represents an abstraction for the completion status
-of zero or more asynchronous collective operations. The value of a
-completion variable includes its completion count, which is a count of
-outstanding asynchronous collective operations associated with this
-variable. The initial value of the completion count of a completion
-variable is zero. A completion variable shall not become undefined
-while its completion count is non-zero.
+A completion variable is a data abstraction for the completion status of
+zero or more asynchronous operations. The completion variable abstraction
+includes a completion count, which is a count of outstanding asynchronous
+operations associated with this variable. A completion variable shall be
+capable of representing at least 127 associated outstanding operations. The
+initial value of the completion count of a completion variable is zero. A
+completion variable shall not become undefined while its completion count
+is non-zero.
 
 C??? A named entity with declared type COMPLETION_TYPE, or which has a
      potential subobject component with declared type COMPLETION_TYPE,
