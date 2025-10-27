@@ -477,9 +477,10 @@ associated completion variable C.
 
 <<NOTE>>
 COMPLETE is not a collective subroutine. Execution of COMPLETE does not
-imply any synchronization between images. Completion of an asynchronous
-collective operation by one image does not imply completion of the same
-collective operation by any other image.
+imply any synchronization between images, and a reference to COMPLETE is
+not an image control statement. Completion of an asynchronous collective
+operation by one image does not imply completion of the same collective
+operation by any other image.
 
 ------------------------------------------------------------------------
 [493:14+] Insert a new section in 16.10.2 before CURRENT_TEAM:
