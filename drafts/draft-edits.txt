@@ -285,8 +285,9 @@ COMPLETE( COMPLETION [, FINISHED ])  S  Synchronize a completion variable.
 "TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
       ISO_FORTRAN_ENV. It is an INTENT (IN) argument.
 
- COMPLETION shall be a scalar of type COMPLETION_TYPE from the intrinsic
-            module ISO_FORTRAN_ENV. It is an INTENT (INOUT) argument."
+ COMPLETION shall be a noncoindexed scalar of type COMPLETION_TYPE from the
+            intrinsic module ISO_FORTRAN_ENV. It is an INTENT (INOUT)
+            argument."
 
 [409:9] replace paragraph 4 with:
 
@@ -335,8 +336,9 @@ COMPLETE( COMPLETION [, FINISHED ])  S  Synchronize a completion variable.
 "TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
       ISO_FORTRAN_ENV. It is an INTENT (IN) argument.
 
- COMPLETION shall be a scalar of type COMPLETION_TYPE from the intrinsic
-            module ISO_FORTRAN_ENV. It is an INTENT (INOUT) argument."
+ COMPLETION shall be a noncoindexed scalar of type COMPLETION_TYPE from the
+            intrinsic module ISO_FORTRAN_ENV. It is an INTENT (INOUT)
+            argument."
 
 [410:15] replace paragraph 4 with:
 
@@ -363,8 +365,9 @@ COMPLETE( COMPLETION [, FINISHED ])  S  Synchronize a completion variable.
 "TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
       ISO_FORTRAN_ENV. It is an INTENT (IN) argument.
 
- COMPLETION shall be a scalar of type COMPLETION_TYPE from the intrinsic
-            module ISO_FORTRAN_ENV. It is an INTENT (INOUT) argument."
+ COMPLETION shall be a noncoindexed scalar of type COMPLETION_TYPE from the
+            intrinsic module ISO_FORTRAN_ENV. It is an INTENT (INOUT)
+            argument."
 
 [411:7] replace paragraph 4 with:
 
@@ -388,8 +391,9 @@ COMPLETE( COMPLETION [, FINISHED ])  S  Synchronize a completion variable.
 "TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
       ISO_FORTRAN_ENV. It is an INTENT (IN) argument.
 
- COMPLETION shall be a scalar of type COMPLETION_TYPE from the intrinsic
-            module ISO_FORTRAN_ENV. It is an INTENT (INOUT) argument."
+ COMPLETION shall be a noncoindexed scalar of type COMPLETION_TYPE from the
+            intrinsic module ISO_FORTRAN_ENV. It is an INTENT (INOUT)
+            argument."
 
 [411:39] replace paragraph 4 with:
 
@@ -407,8 +411,9 @@ after the specification of COMMAND_ARGUMENT_COUNT, add:
 
 <<Arguments.>>
 
-COMPLETION shall be a completion variable (16.10.2.??).
-           It shall not be coindexed. It is an INTENT (INOUT) argument.
+COMPLETION shall be a noncoindexed variable of type COMPLETION_TYPE from
+           the intrinsic module ISO_FORTRAN_ENV. It is an INTENT (INOUT)
+           argument.
 
 FINISHED (optional) when present, shall be a variable of logical type with
                     the same shape as COMPLETION. It is an INTENT (OUT)
