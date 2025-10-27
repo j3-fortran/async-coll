@@ -6,8 +6,10 @@ References: 25-162r2, 25-165r1, 25-166r1, 25-127r1, 25-007r1, WG5/N2249
 
 TODO: 
 -----
-* Decide where/how to describe COMPLETION argument (16.6?)
-* Update 18.10.4 Asynchronous communication 
+* Write edits for 16.6 with unincorporated specifications
+* Update 18.10.4 Asynchronous communication
+* Search for any other references to ASYNCHRONOUS attribute that might need
+  to be updated
 
 
 1. Background
@@ -132,13 +134,11 @@ with:
 
 [379:XX]
 
+TODO: Unincorporated Specifications
+-----------------------------------
 
 C3. If the optional COMPLETION argument is absent, the collective
     subroutine retains unchanged semantics as specified in Fortran 2023.
-
-C4. If the optional COMPLETION argument is present, it shall be a
-    completion variable of type COMPLETION_TYPE from the intrinsic module
-    ISO_FORTRAN_ENV. It shall not be coindexed.
 
 C5. If the optional COMPLETION argument is present, then the A argument,
     and the STAT and ERRMSG arguments if present, shall have the
@@ -186,6 +186,30 @@ C13. If the COMPLETION argument is present in a reference to a collective
     subroutine on one image, it shall be present on all the corresponding
     references.
 
+Error Behavior:
+
+E1. If an error condition occurs during the execution of a collective
+    operation and no STAT variable was present during the initiation call,
+    the implementation initiates error termination.  This error termination
+    need not occur during a call to the COMPLETE subroutine.
+
+E2. If a STAT variable was present during the initiation of an asynchronous
+    collective and no error condition occurs during the computation, the
+    STAT variable is assigned a zero value as if by intrinsic assignment.
+    This assignment occurs between initiation and the decrement of the
+    associated completion variable.
+
+E3. If an error condition occurs during the execution of an asynchronous
+    collective operation and a STAT variable was present during the
+    initiation call, the STAT variable is assigned a non-zero value as if
+    by intrinsic assignment.  This assignment occurs between initiation and
+    the decrement of the associated completion variable.
+
+E4. If an error condition occurs during the execution of an asynchronous
+    collective operation and an ERRMSG variable was present during the
+    initiation call, the ERRMSG variable is assigned an explanatory error
+    message as if by intrinsic assignment.  This assignment occurs between
+    initiation and the decrement of the associated completion variable.
 
 -------------------------------------------------------------------------
 -------------------------------------------------------------------------
