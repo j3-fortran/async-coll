@@ -243,8 +243,8 @@ CO_SUM (A [, RESULT_IMAGE], TEAM, COMPLETION [, STAT, ERRMSG])
 after the entry for COMMAND_ARGUMENT_COUNT add a new entry:
 
 "
-COMPLETE( COMPLETION [, FINISHED ])  S \
-     Wait for or query a completion variable.
+COMPLETE( COMPLETION [, FINISHED ]) \
+    S   Wait for or query a completion variable.
 "
 
 -------------------------------------------------------------------------
