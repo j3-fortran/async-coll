@@ -135,12 +135,12 @@ with:
       input communication (18.10.4) and is associated with the provided
       completion variable;
     * the completion count of the associated completion variable is
-      incremented before the initiation call returns;
+      incremented by one before the initiation call returns;
     * after the collective operation finishes its computation with respect
       to the current image, the completion count of the associated
-      completion variable is decremented by the processor. This decrement
-      occurs regardless of whether an error condition occurs. This
-      decrement is permitted to occur before the initiation call returns;
+      completion variable is decremented by one. This decrement occurs
+      regardless of whether an error condition occurs. This decrement is
+      permitted to occur before the initiation call returns;
     * the asynchronous collective operation is outstanding on a given image
       during the period between subroutine invocation and when the
       completion count of the associated completion variable next reaches
