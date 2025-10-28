@@ -158,8 +158,6 @@ with:
     * the A argument, and the STAT and ERRMSG arguments if present, are
       pending communication affectors (TODO: 18.10.4) while the
       asynchronous collective operation remains outstanding;
-    * if an error condition occurs and no STAT variable was present during
-      the initiation call, the processor initiates error termination while
 
 NOTE
 ========================
