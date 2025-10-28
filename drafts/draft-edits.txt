@@ -151,14 +151,14 @@ with:
       pending communication affectors (18.10.4) while the asynchronous
       collective operation remains outstanding;
 
-NOTE
+<<NOTE>>
 ========================
 A completion variable decrement on one image does not imply that other
 images participating in the same asynchronous collective operation have
 finished their computation.
 ========================
 
-NOTE
+<<NOTE>>
 ========================
 The processor is encouraged to return as quickly as possible from an
 asynchronous collective initiation call, but is permitted to stall for
@@ -445,11 +445,13 @@ associated completion variable C.
   END SUBROUTINE
 
 <<NOTE>>
+========================
 COMPLETE is not a collective subroutine. Execution of COMPLETE does not
 imply any synchronization between images, and a reference to COMPLETE is
 not an image control statement. Completion of an asynchronous collective
 operation by one image does not imply completion of the same collective
 operation by any other image.
+========================
 
 ------------------------------------------------------------------------
 [493:14+] Insert a new section in 16.10.2 before CURRENT_TEAM:
