@@ -4,13 +4,6 @@ From: Brandon Cook & Damian Rouson & Dan Bonachea & Reuben D. Budiardja
 Date: 2025-October-XX
 References: 25-162r2, 25-165r1, 25-166r1, 25-127r1, 25-007r1, WG5/N2249
 
-TODO: 
------
-* Update 18.10.4 Asynchronous communication
-* Search for any other references to ASYNCHRONOUS attribute that might need
-  to be updated
-
-
 1. Background
 -------------
 The current Fortran 202Y work list WG5/N2249 includes asynchronous
@@ -136,19 +129,18 @@ with:
 
 "If the COMPLETION argument appears in a reference to a collective
  subroutine on one image, then:
-    * it shall be present on all the corresponding references;
+    * it shall appear in all the corresponding references;
     * the subroutine invocation is an initiation for asynchronous
       communication, the collective operation proceeds as an asynchronous
-      input communication (TODO: 18.10.4) and is associated with the
-      provided completion variable;
+      input communication (18.10.4) and is associated with the provided
+      completion variable;
     * the completion count of the associated completion variable is
       incremented before the initiation call returns;
     * after the collective operation finishes its computation with respect
       to the current image, the completion count of the associated
       completion variable is decremented by the processor. This decrement
       occurs regardless of whether an error condition occurs. This
-      decrement is permitted to occur before the initiation call
-      returns;
+      decrement is permitted to occur before the initiation call returns;
     * the asynchronous collective operation is outstanding on a given image
       during the period between subroutine invocation and when the
       completion count of the associated completion variable next reaches
@@ -156,8 +148,8 @@ with:
     * the A argument, and the STAT and ERRMSG arguments if present, shall
       have the ASYNCHRONOUS attribute;
     * the A argument, and the STAT and ERRMSG arguments if present, are
-      pending communication affectors (TODO: 18.10.4) while the
-      asynchronous collective operation remains outstanding;
+      pending communication affectors (18.10.4) while the asynchronous
+      collective operation remains outstanding;
 
 NOTE
 ========================
@@ -251,7 +243,8 @@ CO_SUM (A [, RESULT_IMAGE], TEAM, COMPLETION [, STAT, ERRMSG])
 after the entry for COMMAND_ARGUMENT_COUNT add a new entry:
 
 "
-COMPLETE( COMPLETION [, FINISHED ])  S  Synchronize a completion variable.
+COMPLETE( COMPLETION [, FINISHED ])  S \
+     Wait for or query a completion variable.
 "
 
 -------------------------------------------------------------------------
@@ -395,7 +388,7 @@ after the specification of COMMAND_ARGUMENT_COUNT, add:
 
 16.9.?? COMPLETE( COMPLETION [, FINISHED ])
 
-<<Description.>> Synchronize a completion variable.
+<<Description.>> Wait for or query a completion variable.
 
 <<Class.>> Subroutine.
 
@@ -432,7 +425,7 @@ collective subroutines and overlap the latency of that communication with
 other unrelated work. In the example, there is asynchronous input
 communication; the variables X, Y and S are pending communication affectors
 between the collective subroutine initiation call where they are passed as
-arguments and the subsequent COMPLETE subroutine call that synchronizes the
+arguments and the subsequent COMPLETE subroutine call that waits for the
 associated completion variable C.
 
   SUBROUTINE simple_overlap
