@@ -7,7 +7,7 @@ References: 25-162r2, 25-165r1, 25-166r1, 25-127r1, 25-007r1, WG5/N2249
 1. Background
 -------------
 The current Fortran 202Y work list WG5/N2249 includes asynchronous
-collective subroutines as accepted work item US04, and add execution of
+collective subroutines as accepted work item US04 and adds execution of
 collective procedures on a specified team as accepted work item DIN1.
 
 Paper 25-162r2 "US04: Requirements for Asynchronous Collective
@@ -26,8 +26,8 @@ US04.  The functionality of these two features (US04 and DIN1) is entirely
 orthogonal, but their effects must be merged in the final syntax.
 
 Paper 25-166r2 "US04: Syntax for Asynchronous Collective Subroutines"
-presents the syntax for the asynchronous collective subroutines feature,
-and incorporates the syntactic changes from work item DIN1. In passed at
+presents the syntax for the asynchronous collective subroutines feature
+and incorporates the syntactic changes from work item DIN1. It passed at
 the Oct 2025 J3 meeting #237
 
 This paper presents the combined edits for work items US04 and DIN1,
