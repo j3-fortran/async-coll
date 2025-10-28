@@ -35,8 +35,8 @@ orthogonal, but their effects must be merged in the final syntax.
 
 Paper 25-166r2 "US04: Syntax for Asynchronous Collective Subroutines"
 presents the syntax for the asynchronous collective subroutines feature,
-and incorporates the syntactic changes from work item DIN1.
-*** TODO: paper status
+and incorporates the syntactic changes from work item DIN1. In passed at
+the Oct 2025 J3 meeting #237
 
 This paper presents the combined edits for work items US04 and DIN1,
 and supersedes the edits passed in section 5 of 25-127r1.
