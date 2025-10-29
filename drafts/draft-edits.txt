@@ -50,12 +50,14 @@ collective subroutines.
 
 [31:33+] Before 3.151.1 (event variable) insert new definition:
 
+"
 3.151.?
 completion variable
 scalar variable of type COMPLETION_TYPE from the intrinsic module
 ISO_FORTRAN_ENV
 
 Note 1 to entry: See 16.10.2.??.
+"
 
 -------------------------------------------------------------------------
 7.5.2.1 Syntax of a derived-type definition:
@@ -127,8 +129,9 @@ with:
 [381:3+] after paragraph 3:
  Insert a new paragraph reading:
 
-"If the COMPLETION argument appears in a reference to a collective
- subroutine on one image, then:
+"
+If the COMPLETION argument appears in a reference to a collective
+subroutine on one image, then:
     * it shall appear in all the corresponding references;
     * the subroutine invocation is an initiation for asynchronous
       communication, the collective operation proceeds as an asynchronous
@@ -169,12 +172,10 @@ returning.
 
 [381:19+] append to paragraph 7:
 
-"
-If the COMPLETION argument appears in the initiation call, this error
-termination is initiated while the asynchronous communication is
-outstanding; the error termination need not occur during the initiation
-call or a completion call to the COMPLETE subroutine.
-"
+"If the COMPLETION argument appears in the initiation call, this error
+ termination is initiated while the asynchronous communication is
+ outstanding; the error termination need not occur during the initiation
+ call or a completion call to the COMPLETE subroutine."
 
 -------------------------------------------------------------------------
 [383] In 16.7 Standard generic intrinsic procedures, Table 16.1,
@@ -266,12 +267,14 @@ COMPLETE( COMPLETION [, FINISHED ]) \
 
 [409:6+] before the description of STAT in paragraph 3, insert:
 
-"TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
+"
+ TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
       ISO_FORTRAN_ENV. It is an INTENT (IN) argument.
 
  COMPLETION shall be a noncoindexed scalar of type COMPLETION_TYPE from the
             intrinsic module ISO_FORTRAN_ENV. It is an INTENT (INOUT)
-            argument."
+            argument.
+"
 
 [409:9] replace paragraph 4 with:
 
@@ -292,11 +295,15 @@ COMPLETE( COMPLETION [, FINISHED ]) \
 
 [409:28+] before the description of STAT in paragraph 3, insert:
 
-"TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
+"
+ TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
       ISO_FORTRAN_ENV. It is an INTENT (IN) argument.
 
- COMPLETION shall be a scalar of type COMPLETION_TYPE from the intrinsic
-            module ISO_FORTRAN_ENV. It is an INTENT (INOUT) argument."
+ COMPLETION shall be a noncoindexed scalar of type COMPLETION_TYPE from the
+            intrinsic module ISO_FORTRAN_ENV. It is an INTENT (INOUT)
+            argument.
+"
+
 
 [409:31] replace paragraph 4 with:
 
@@ -317,12 +324,15 @@ COMPLETE( COMPLETION [, FINISHED ]) \
 
 [410:12+] before the description of STAT in paragraph 3, insert:
 
-"TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
+"
+ TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
       ISO_FORTRAN_ENV. It is an INTENT (IN) argument.
 
  COMPLETION shall be a noncoindexed scalar of type COMPLETION_TYPE from the
             intrinsic module ISO_FORTRAN_ENV. It is an INTENT (INOUT)
-            argument."
+            argument.
+"
+
 
 [410:15] replace paragraph 4 with:
 
@@ -346,12 +356,15 @@ COMPLETE( COMPLETION [, FINISHED ]) \
 
 [411:4+] before the description of STAT in paragraph 3, insert:
 
-"TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
+"
+ TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
       ISO_FORTRAN_ENV. It is an INTENT (IN) argument.
 
  COMPLETION shall be a noncoindexed scalar of type COMPLETION_TYPE from the
             intrinsic module ISO_FORTRAN_ENV. It is an INTENT (INOUT)
-            argument."
+            argument.
+"
+
 
 [411:7] replace paragraph 4 with:
 
@@ -372,12 +385,15 @@ COMPLETE( COMPLETION [, FINISHED ]) \
 
 [411:36+] before the description of STAT in paragraph 3, insert:
 
-"TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
+"
+ TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
       ISO_FORTRAN_ENV. It is an INTENT (IN) argument.
 
  COMPLETION shall be a noncoindexed scalar of type COMPLETION_TYPE from the
             intrinsic module ISO_FORTRAN_ENV. It is an INTENT (INOUT)
-            argument."
+            argument.
+"
+
 
 [411:39] replace paragraph 4 with:
 
@@ -385,8 +401,9 @@ COMPLETE( COMPLETION [, FINISHED ]) \
 
 -------------------------------------------------------------------------
 [412:14+] In 16.9 Specifications of the standard intrinsic procedures,
-after the specification of COMMAND_ARGUMENT_COUNT, add:
+before the specification of CONJG, insert new section:
 
+"
 16.9.?? COMPLETE( COMPLETION [, FINISHED ])
 
 <<Description.>> Wait for or query a completion variable.
@@ -453,10 +470,12 @@ not an image control statement. Completion of an asynchronous collective
 operation by one image does not imply completion of the same collective
 operation by any other image.
 ========================
+"
 
 ------------------------------------------------------------------------
 [493:14+] Insert a new section in 16.10.2 before CURRENT_TEAM:
 
+"
 16.10.2.?? COMPLETION_TYPE
 
 COMPLETION_TYPE is a derived type with private components. It is an
@@ -489,7 +508,7 @@ C??? A variable with a nonpointer subobject of type COMPLETION_TYPE shall
      specifier, as an <allocate-object> in a DEALLOCATE statement, or as an
      actual argument in a reference to a procedure with an explicit
      interface if the corresponding dummy argument has INTENT (INOUT).
-
+"
 
 ------------------------------------------------------------------------
 
