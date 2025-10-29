@@ -160,9 +160,10 @@ finished their computation.
 
 <<NOTE 2>>
 ========================
-The processor is encouraged to return as quickly as possible from an
-asynchronous collective initiation call, but is permitted to stall for
-processor-dependent reasons before returning.
+The processor is encouraged to ensure that execution returns as quickly as
+possible from an asynchronous collective initiation call, but the
+invocation is permitted to stall for processor-dependent reasons before
+returning.
 ========================
 "
 
