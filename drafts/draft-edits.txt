@@ -7,7 +7,7 @@ References: 25-162r2, 25-165r1, 25-166r1, 25-127r1, 25-007r1, WG5/N2249
 1. Background
 -------------
 The current Fortran 202Y work list WG5/N2249 includes asynchronous
-collective subroutines as accepted work item US04 and adds execution of
+collective subroutines as accepted work item US04 and execution of
 collective procedures on a specified team as accepted work item DIN1.
 
 Paper 25-162r2 "US04: Requirements for Asynchronous Collective
@@ -31,7 +31,7 @@ and incorporates the syntactic changes from work item DIN1. It passed at
 the Oct 2025 J3 meeting #237
 
 This paper presents the combined edits for work items US04 and DIN1,
-and supersedes the edits passed in section 5 of 25-127r1.
+and supersedes the edits previously passed in section 5 of 25-127r1.
 
 2. Edits Relative to 25-007r1
 =============================
@@ -151,14 +151,14 @@ with:
       pending communication affectors (18.10.4) while the asynchronous
       collective operation remains outstanding;
 
-<<NOTE>>
+<<NOTE 1>>
 ========================
 A completion variable decrement on one image does not imply that other
 images participating in the same asynchronous collective operation have
 finished their computation.
 ========================
 
-<<NOTE>>
+<<NOTE 2>>
 ========================
 The processor is encouraged to return as quickly as possible from an
 asynchronous collective initiation call, but is permitted to stall for
@@ -228,7 +228,7 @@ CO_REDUCE (A, OPERATION [, RESULT_IMAGE], TEAM, COMPLETION
 
 -------------------------------------------------------------------------
 [383] In 16.7 Standard generic intrinsic procedures, Table 16.1,
-replace the entry for CO_ with the following:
+replace the entry for CO_SUM with the following:
 
 "
 CO_SUM (A [, RESULT_IMAGE, STAT, ERRMSG]) or \
@@ -304,7 +304,7 @@ COMPLETE( COMPLETION [, FINISHED ]) \
 -------------------------------------------------------------------------
 16.9.56 CO_MIN:
 
-[409:36] Replace the heading with:
+[409:35] Replace the heading with:
 
 "CO_MIN (A [, RESULT_IMAGE, STAT, ERRMSG]) or \
  CO_MIN (A [, RESULT_IMAGE], COMPLETION [, STAT, ERRMSG]) or \
@@ -485,7 +485,7 @@ C??? A completion variable shall not appear in a variable definition
 C??? A variable with a nonpointer subobject of type COMPLETION_TYPE shall
      not appear in a variable definition context except as an
      <allocate-object> in an ALLOCATE statement without a SOURCE=
-     specifier, as an allocate-object in a DEALLOCATE statement, or as an
+     specifier, as an <allocate-object> in a DEALLOCATE statement, or as an
      actual argument in a reference to a procedure with an explicit
      interface if the corresponding dummy argument has INTENT (INOUT).
 
