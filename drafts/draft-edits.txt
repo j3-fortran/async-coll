@@ -148,11 +148,13 @@ subroutine on one image, then:
       during the period between subroutine invocation and when the
       completion count of the associated completion variable next reaches
       zero;
-    * the A argument, and the STAT and ERRMSG arguments if present, shall
-      have the ASYNCHRONOUS attribute;
     * the A argument, and the STAT and ERRMSG arguments if present, are
       pending communication affectors (18.10.4) while the asynchronous
       collective operation remains outstanding;
+
+C1602b  If the COMPLETION argument appears in a reference to a collective
+        subroutine, then the A argument, and the STAT and ERRMSG arguments
+        if present, shall have the ASYNCHRONOUS attribute.
 
 <<NOTE 1>>
 ========================
