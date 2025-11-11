@@ -113,7 +113,7 @@ with:
  Insert new paragraph reading:
 
 "The team specified by an invocation of a collective subroutine is
- the current team if the TEAM argument is not present in that
+ the current team if the TEAM argument does not appear in that
  invocation. Otherwise, it is the team identified by the value of
  the TEAM argument. On all images participating in the same collective
  computation, the specified team shall be the same team; either the
