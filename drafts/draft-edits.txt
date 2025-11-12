@@ -48,15 +48,15 @@ collective subroutines.
 -------------------------------------------------------------------------
 3 Terms and definitions:
 
-[31:33+] Before 3.151.1 (event variable) insert new definition:
+[31:33-] Before 3.151.1 (event variable) insert new definition:
 
 "
-3.151.?
+3.151.0a
 completion variable
 scalar variable of type COMPLETION_TYPE from the intrinsic module
 ISO_FORTRAN_ENV
 
-Note 1 to entry: See 16.10.2.??.
+Note 1 to entry: See 16.10.2.7a.
 "
 
 -------------------------------------------------------------------------
@@ -79,7 +79,7 @@ with:
 
 with:
 
-"COMPLETION_TYPE (16.10.2.??), EVENT_TYPE (16.10.2.10),"
+"COMPLETION_TYPE (16.10.2.7a), EVENT_TYPE (16.10.2.10),"
 
 -------------------------------------------------------------------------
 9.7.1.1 Form of the ALLOCATE statement:
@@ -109,11 +109,11 @@ with:
 [380:28] paragraph 1:
  replace "its current team" with "the specified team"
 
-[380:30+] after paragraph 1:
+[380:30-] after paragraph 1:
  Insert new paragraph reading:
 
 "The team specified by an invocation of a collective subroutine is
- the current team if the TEAM argument is not present in that
+ the current team if the TEAM argument does not appear in that
  invocation. Otherwise, it is the team identified by the value of
  the TEAM argument. On all images participating in the same collective
  computation, the specified team shall be the same team; either the
@@ -126,7 +126,7 @@ with:
 [381:2,7,13,15] paragraph 3, paragraph 4 bullet 4, paragraph 6 (twice):
  replace "the current team" with "the specified team".
 
-[381:3+] after paragraph 3:
+[381:3-] after paragraph 3:
  Insert a new paragraph reading:
 
 "
@@ -148,11 +148,13 @@ subroutine on one image, then:
       during the period between subroutine invocation and when the
       completion count of the associated completion variable next reaches
       zero;
-    * the A argument, and the STAT and ERRMSG arguments if present, shall
-      have the ASYNCHRONOUS attribute;
     * the A argument, and the STAT and ERRMSG arguments if present, are
       pending communication affectors (18.10.4) while the asynchronous
       collective operation remains outstanding;
+
+C1602b  If the COMPLETION argument appears in a reference to a collective
+        subroutine, then the A argument, and the STAT and ERRMSG arguments
+        if present, shall have the ASYNCHRONOUS attribute.
 
 <<NOTE 1>>
 ========================
@@ -265,7 +267,7 @@ COMPLETE( COMPLETION [, FINISHED ]) \
 [409:4] in the description of SOURCE_IMAGE:
  replace "the current team" with "the specified team"
 
-[409:6+] before the description of STAT in paragraph 3, insert:
+[409:6-] before the description of STAT in paragraph 3, insert:
 
 "
  TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
@@ -293,7 +295,7 @@ COMPLETE( COMPLETION [, FINISHED ]) \
 [409:27] in the description of RESULT_IMAGE:
  replace "the current team" with "the specified team"
 
-[409:28+] before the description of STAT in paragraph 3, insert:
+[409:28-] before the description of STAT in paragraph 3, insert:
 
 "
  TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
@@ -322,7 +324,7 @@ COMPLETE( COMPLETION [, FINISHED ]) \
 [410:11] in the description of RESULT_IMAGE:
  replace "the current team" with "the specified team"
 
-[410:12+] before the description of STAT in paragraph 3, insert:
+[410:12-] before the description of STAT in paragraph 3, insert:
 
 "
  TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
@@ -354,7 +356,7 @@ COMPLETE( COMPLETION [, FINISHED ]) \
 [411:3] in the description of RESULT_IMAGE:
  replace "the current team" with "the specified team"
 
-[411:4+] before the description of STAT in paragraph 3, insert:
+[411:4-] before the description of STAT in paragraph 3, insert:
 
 "
  TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
@@ -383,7 +385,7 @@ COMPLETE( COMPLETION [, FINISHED ]) \
 [411:35] in the description of RESULT_IMAGE:
  replace "the current team" with "the specified team"
 
-[411:36+] before the description of STAT in paragraph 3, insert:
+[411:36-] before the description of STAT in paragraph 3, insert:
 
 "
  TEAM shall be a scalar of type TEAM_TYPE from the intrinsic module
@@ -400,11 +402,11 @@ COMPLETE( COMPLETION [, FINISHED ]) \
 "The semantics of TEAM, COMPLETION, STAT and ERRMSG are described in 16.6."
 
 -------------------------------------------------------------------------
-[412:14+] In 16.9 Specifications of the standard intrinsic procedures,
+[412:14-] In 16.9 Specifications of the standard intrinsic procedures,
 before the specification of CONJG, insert new section:
 
 "
-16.9.?? COMPLETE( COMPLETION [, FINISHED ])
+16.9.59a COMPLETE( COMPLETION [, FINISHED ])
 
 <<Description.>> Wait for or query a completion variable.
 
@@ -473,10 +475,10 @@ operation by any other image.
 "
 
 ------------------------------------------------------------------------
-[493:14+] Insert a new section in 16.10.2 before CURRENT_TEAM:
+[493:14-] Insert a new section in 16.10.2 before CURRENT_TEAM:
 
 "
-16.10.2.?? COMPLETION_TYPE
+16.10.2.7a COMPLETION_TYPE
 
 COMPLETION_TYPE is a derived type with private components. It is an
 extensible type with no type parameters. Each nonallocatable component is
