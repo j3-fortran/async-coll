@@ -117,8 +117,8 @@ with:
  invocation. Otherwise, it is the team identified by the value of
  the TEAM argument. On all images participating in the same collective
  computation, the specified team shall be the same team; either the
- initial team, or the same team created by the same FORM TEAM statement
- (11.7.9)."
+ initial team, or a team created by corresponding executions of the same
+ FORM TEAM statement (11.7.9) with the same value for \si{team-number}."
 
 [380:32] paragraph 2:
   replace "of a team" with "of the specified team".
@@ -127,49 +127,33 @@ with:
  replace "the current team" with "the specified team".
 
 [381:3-] after paragraph 3:
- Insert a new paragraph reading:
+ Insert new paragraphs reading:
 
 "
 If the COMPLETION argument appears in a reference to a collective
-subroutine on one image, then:
-    * it shall appear in all the corresponding references;
-    * the subroutine invocation is an initiation for asynchronous
-      communication, the collective operation proceeds as an asynchronous
-      input communication (18.10.4) and is associated with the provided
-      completion variable;
-    * the completion count of the associated completion variable is
-      incremented by one before the initiation call returns;
-    * after the collective operation finishes its computation with respect
-      to the current image, the completion count of the associated
-      completion variable is decremented by one. This decrement occurs
-      regardless of whether an error condition occurs. This decrement is
-      permitted to occur before the initiation call returns;
-    * the asynchronous collective operation is outstanding on a given image
-      during the period between subroutine invocation and when the
-      completion count of the associated completion variable next reaches
-      zero;
-    * the A argument, and the STAT and ERRMSG arguments if present, are
-      pending communication affectors (18.10.4) while the asynchronous
-      collective operation remains outstanding;
+subroutine, the reference initiates an asynchronous collective operation.
+This collective operation proceeds as an asynchronous input communication
+(18.10.4) and is associated with COMPLETION. The completion count of
+COMPLETION is incremented by one before the initiation call returns, and
+decremented by one after the collective operation finishes its computation
+with respect to the current image. The decrement occurs even if an error
+condition occurs. The decrement may occur before the initiation call
+returns.
 
-C1602b  If the COMPLETION argument appears in a reference to a collective
+An asynchronous collective operation is outstanding on a given image during
+the period between subroutine invocation and when the completion count of
+COMPLETION next reaches zero. The A argument, and the STAT and ERRMSG
+arguments if present, are pending communication affectors (18.10.4) while
+the asynchronous collective operation remains outstanding.
+
+C1602a  If the COMPLETION argument appears in a reference to a collective
         subroutine, then the A argument, and the STAT and ERRMSG arguments
         if present, shall have the ASYNCHRONOUS attribute.
 
-<<NOTE 1>>
-========================
+NOTE
 A completion variable decrement on one image does not imply that other
 images participating in the same asynchronous collective operation have
 finished their computation.
-========================
-
-<<NOTE 2>>
-========================
-The processor is encouraged to ensure that execution returns as quickly as
-possible from an asynchronous collective initiation call, but the
-invocation is permitted to stall for processor-dependent reasons before
-returning.
-========================
 "
 
 [381:19+] append to paragraph 7:
@@ -464,14 +448,12 @@ associated completion variable C.
      END BLOCK
   END SUBROUTINE
 
-<<NOTE>>
-========================
+NOTE
 COMPLETE is not a collective subroutine. Execution of COMPLETE does not
 imply any synchronization between images, and a reference to COMPLETE is
 not an image control statement. Completion of an asynchronous collective
 operation by one image does not imply completion of the same collective
 operation by any other image.
-========================
 "
 
 ------------------------------------------------------------------------
@@ -494,22 +476,22 @@ initial value of the completion count of a completion variable is zero. A
 completion variable shall not become undefined while its completion count
 is non-zero.
 
-C??? A named entity with declared type COMPLETION_TYPE, or which has a
-     potential subobject component with declared type COMPLETION_TYPE,
-     shall be a variable. A component that is of such a type shall be a
-     data component.
+C1602b A named entity with declared type COMPLETION_TYPE, or which has a
+       potential subobject component with declared type COMPLETION_TYPE,
+       shall be a variable. A component that is of such a type shall be a
+       data component.
 
-C??? A completion variable shall not appear in a variable definition
-     context except as an <allocate-object>, or as an actual argument in a
-     reference to a procedure with an explicit interface if the
-     corresponding dummy argument has INTENT (INOUT).
+C1602c A completion variable shall not appear in a variable definition
+       context except as an <allocate-object>, or as an actual argument in
+       a reference to a procedure with an explicit interface if the
+       corresponding dummy argument has INTENT (INOUT).
 
-C??? A variable with a nonpointer subobject of type COMPLETION_TYPE shall
-     not appear in a variable definition context except as an
-     <allocate-object> in an ALLOCATE statement without a SOURCE=
-     specifier, as an <allocate-object> in a DEALLOCATE statement, or as an
-     actual argument in a reference to a procedure with an explicit
-     interface if the corresponding dummy argument has INTENT (INOUT).
+C1602d A variable with a nonpointer subobject of type COMPLETION_TYPE shall
+       not appear in a variable definition context except as an
+       <allocate-object> in an ALLOCATE statement without a SOURCE=
+       specifier, as an <allocate-object> in a DEALLOCATE statement, or as
+       an actual argument in a reference to a procedure with an explicit
+       interface if the corresponding dummy argument has INTENT (INOUT).
 "
 
 ------------------------------------------------------------------------
