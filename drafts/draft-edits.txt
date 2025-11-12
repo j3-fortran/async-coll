@@ -142,7 +142,7 @@ returns.
 
 An asynchronous collective operation is outstanding on a given image during
 the period between subroutine invocation and when the completion count of
-COMPLETION reaches zero. The A argument, and the STAT and ERRMSG
+COMPLETION next reaches zero. The A argument, and the STAT and ERRMSG
 arguments if present, are pending communication affectors (18.10.4) while
 the asynchronous collective operation remains outstanding.
 
