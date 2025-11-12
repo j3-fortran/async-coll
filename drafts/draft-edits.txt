@@ -117,8 +117,8 @@ with:
  invocation. Otherwise, it is the team identified by the value of
  the TEAM argument. On all images participating in the same collective
  computation, the specified team shall be the same team; either the
- initial team, or the same team created by the same FORM TEAM statement
- (11.7.9)."
+ initial team, or a team created by corresponding executions of the same
+ FORM TEAM statement (11.7.9) with the same value for \si{team-number}."
 
 [380:32] paragraph 2:
   replace "of a team" with "of the specified team".
