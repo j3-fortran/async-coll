@@ -127,30 +127,24 @@ with:
  replace "the current team" with "the specified team".
 
 [381:3-] after paragraph 3:
- Insert a new paragraph reading:
+ Insert new paragraphs reading:
 
 "
 If the COMPLETION argument appears in a reference to a collective
-subroutine on one image, then:
-    * it shall appear in all the corresponding references;
-    * the subroutine invocation is an initiation for asynchronous
-      communication, the collective operation proceeds as an asynchronous
-      input communication (18.10.4) and is associated with the provided
-      completion variable;
-    * the completion count of the associated completion variable is
-      incremented by one before the initiation call returns;
-    * after the collective operation finishes its computation with respect
-      to the current image, the completion count of the associated
-      completion variable is decremented by one. This decrement occurs
-      regardless of whether an error condition occurs. This decrement is
-      permitted to occur before the initiation call returns;
-    * the asynchronous collective operation is outstanding on a given image
-      during the period between subroutine invocation and when the
-      completion count of the associated completion variable next reaches
-      zero;
-    * the A argument, and the STAT and ERRMSG arguments if present, are
-      pending communication affectors (18.10.4) while the asynchronous
-      collective operation remains outstanding;
+subroutine, the reference initiates an asynchronous collective operation.
+This collective operation proceeds as an asynchronous input communication
+(18.10.4) and is associated with COMPLETION. The completion count of
+COMPLETION is incremented by one before the initiation call returns, and
+decremented by one after the collective operation finishes its computation
+with respect to the current image. The decrement occurs even if an error
+condition occurs. The decrement may occur before the initiation call
+returns.
+
+An asynchronous collective operation is outstanding on a given image during
+the period between subroutine invocation and when the completion count of
+COMPLETION reaches zero. The A argument, and the STAT and ERRMSG
+arguments if present, are pending communication affectors (18.10.4) while
+the asynchronous collective operation remains outstanding.
 
 C1602b  If the COMPLETION argument appears in a reference to a collective
         subroutine, then the A argument, and the STAT and ERRMSG arguments
